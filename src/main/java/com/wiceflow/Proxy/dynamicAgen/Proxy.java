@@ -23,7 +23,6 @@ public class Proxy {
      * @return 返回一个成功代理对象
      */
     public static Object newProxyInstance(Class infce,InvocationHandler h){
-        System.out.println(infce);
         // 定义换行符 下面会频繁用到
         String rt = "\r\t";
         // 字符串拼接
@@ -32,7 +31,7 @@ public class Proxy {
         // 反射获取传进来的接口所有方法
         // 为什么不使用 getDeclaredMethods() ,因为接口中方法都是全局的，不存在私有方法
         Method[] methods = infce.getMethods();
-        System.out.println(infce.getSimpleName());
+//System.out.println(infce.getSimpleName());
         // 定义动态生成java文件的路径
         // 全路径
         String root1 = new File(infce.getResource("").getPath()).getAbsolutePath();
@@ -41,25 +40,27 @@ public class Proxy {
         String pack = root1.substring(root2.length()+1,root1.length());
         // 截取包名
         pack = pack.replace("\\",".");
-        System.out.println("动态生成的文件路劲为:" + root1);
-        System.out.println("动态生成的文件包名为:" + pack);
+//System.out.println("动态生成的文件路劲为:" + root1);
+//System.out.println("动态生成的文件包名为:" + pack);
         // 类名
         String className = infce.getSimpleName() + "Proxy";
-        System.out.println("动态生成的文件类名为:" + className);
+//System.out.println("动态生成的文件类名为:" + className);
 
         //当前类的包名 在动态生成的文件中需要用到
         String r1 = new File(Proxy.class.getResource("").getPath()).getAbsolutePath();
         String r2 = new File(Proxy.class.getResource("/").getPath()).getAbsolutePath();
         String r3 = r1.substring(r2.length()+1,r1.length());
         r3 = r3.replace("\\",".");
-        System.out.println("当前类的包名："+r3);
+//System.out.println("当前类的包名："+r3);
 
+        // 获取接口的所有方法
         for(Method m : methods) {
             methodStr +=
                     "@Override" + rt +
                     "public void " + m.getName() + "() {" + rt +
                     "    try {" + rt +
                     "       Method md = " + infce.getName() + ".class.getMethod(\"" + m.getName() + "\");" + rt +
+                            // 执行当前对象的指定方法
                     "       h.invoke(this, md);" + rt +
                     "    }catch(Exception e){" + rt +
                     "       e.printStackTrace();" + rt +
@@ -67,7 +68,7 @@ public class Proxy {
                     "    }" + rt +
                     "}" + rt;
         }
-
+        // 动态生成代码
         String src =
                 "package " + pack + ";" + rt +
                 "import java.lang.reflect.Method;" + rt +
@@ -81,7 +82,7 @@ public class Proxy {
                 "}";
         // 全路径 + 类名 这时候路径是本来就存在的 所有可以直接创建
         String fileName = root1 + "\\" + className + ".java";
-        System.out.println("当前生成文件路径名：" + fileName);
+//System.out.println("当前生成文件路径名：" + fileName);
         File f = new File(fileName);
         FileWriter fw = null;
         try {

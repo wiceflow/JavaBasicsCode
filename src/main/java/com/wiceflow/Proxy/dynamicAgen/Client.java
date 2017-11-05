@@ -1,6 +1,5 @@
 package com.wiceflow.Proxy.dynamicAgen;
 
-import java.io.File;
 
 /**
  * 测试入口
@@ -10,8 +9,13 @@ public class Client {
     public static void main(String[] args) {
         Chicken c = new Chicken();
         InvocationHandler h = new TimeHandler(c);
-        System.out.println(MoveAble.class);
-        MoveAble m = (MoveAble)Proxy.newProxyInstance(MoveAble.class,h);
-        m.move();
+        java.lang.reflect.InvocationHandler b = new HAHAHandler(c);
+        //MoveAble m = (MoveAble)Proxy.newProxyInstance(MoveAble.class,h);
+
+
+        MoveAble n = (MoveAble) java.lang.reflect.Proxy.newProxyInstance(Chicken.class.getClassLoader(),Chicken.class.getInterfaces(),b);
+        //m.move();
+        //m.say();
+        n.move();
     }
 }

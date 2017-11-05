@@ -15,7 +15,7 @@ public class quicksort {
     public quicksort(int[] nums) {
         this.b = nums;
     }
-
+    // 6 1 2 7 9 3 4 5 10 8
     // 快排方法
     public void quicksort(int left, int right) {
         int l1 = left, r1 = right;

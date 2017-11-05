@@ -23,8 +23,8 @@ public class TimeHandler implements InvocationHandler{
     public void invoke(Object o, Method m) {
         long start = System.currentTimeMillis();
         System.out.println("starttime:" + start);
-        System.out.println(o.getClass().getName());
         try {
+            // m是方法 target是目标对象
             m.invoke(target);
         } catch (Exception e) {
             e.printStackTrace();

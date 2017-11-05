@@ -6,4 +6,5 @@ package com.wiceflow.Proxy.dynamicAgen;
  */
 public interface MoveAble {
     void move();
+    void say();
 }
