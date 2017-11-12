@@ -1,7 +1,11 @@
 package com.wiceflow.collection.List;
 
+import com.wiceflow.collection.List.myLinkList.MyLinkList;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BF on 2017/11/5.
@@ -45,5 +49,9 @@ public class Test01 {
         System.out.println(list.size());
         System.out.println(list.get(1));
         System.out.println(list.get(2));
+
+        Map a = new HashMap();
+        MyLinkList n = new MyLinkList();
+        n.add(1,"aaa");
     }
 }
