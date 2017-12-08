@@ -2,7 +2,7 @@ package com.wiceflow.json.fastjson;
 import com.alibaba.fastjson.JSON;
 import com.wiceflow.json.fastjson.entity.User;
 import com.wiceflow.json.fastjson.entity.UserGroup;
-import com.wiceflow.json.fastjson.entity.iceflow;
+import com.wiceflow.json.fastjson.entity.Iceflow;
 
 /**
  * Created by BF on 2017/12/6.
@@ -10,7 +10,7 @@ import com.wiceflow.json.fastjson.entity.iceflow;
  */
 public class fastjsonTest {
     public static void main(String[] args) {
-        iceflow iceflow = new iceflow();
+        Iceflow iceflow = new Iceflow();
         iceflow.setAge(21);
         iceflow.setName("文冰峰");
         iceflow.setSchool("肇庆学院");
@@ -37,7 +37,9 @@ public class fastjsonTest {
         System.out.println(jsonString);
 
         UserGroup userGroup1 = JSON.parseObject(jsonString,UserGroup.class);
+        User user = userGroup1.getList().get(0);
 
         System.out.println(userGroup1);
+        System.out.println(user.toString());
     }
 }

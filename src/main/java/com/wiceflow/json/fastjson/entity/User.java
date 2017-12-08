@@ -8,15 +8,15 @@ public class User {
     private String name;
     private String dept;
 
-    public com.wiceflow.json.fastjson.entity.iceflow getIceflow() {
+    public com.wiceflow.json.fastjson.entity.Iceflow getIceflow() {
         return iceflow;
     }
 
-    public void setIceflow(iceflow iceflow) {
+    public void setIceflow(Iceflow iceflow) {
         this.iceflow = iceflow;
     }
 
-    private iceflow iceflow;
+    private Iceflow iceflow;
 
     public int getAge() {
         return age;

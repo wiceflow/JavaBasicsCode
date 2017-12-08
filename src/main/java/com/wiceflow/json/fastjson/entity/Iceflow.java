@@ -3,7 +3,7 @@ package com.wiceflow.json.fastjson.entity;
 /**
  * Created by BF on 2017/12/6.
  */
-public class iceflow {
+public class Iceflow {
     private int age;
     private String name;
     private String word;

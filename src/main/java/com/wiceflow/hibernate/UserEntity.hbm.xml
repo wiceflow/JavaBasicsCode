@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.wiceflow.hibernate.UserEntity" table="user" schema="public" catalog="testHibernate">
+        <id name="id">
+            <column name="id" sql-type="char(255)"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="char(255)" not-null="true"/>
+        </property>
+        <property name="password">
+            <column name="password" sql-type="char(255)" not-null="true"/>
+        </property>
+        <property name="createtime">
+            <column name="createtime" sql-type="date" not-null="true"/>
+        </property>
+        <property name="expiretime">
+            <column name="expiretime" sql-type="date" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
