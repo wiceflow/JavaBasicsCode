@@ -51,11 +51,11 @@ public class AnalysisJson {
             session = sessionFactory.openSession();
             // 开启事务
             session.beginTransaction();
-            //session.save(basic);
-            Basic basic1 = session.get(Basic.class,3);
-            AMPMPortSpeed a = basic1.getAMPMPortSpeed();
-            System.out.println(a.getDistrictName().length());
-            System.out.println(basic1.toString());
+            session.save(basic);
+            //Basic basic1 = session.get(Basic.class,3);
+            //AMPMPortSpeed a = basic1.getAMPMPortSpeed();
+            //System.out.println(a.getDistrictName().length());
+            //System.out.println(basic1.toString());
             session.getTransaction().commit();
         }catch (Exception e) {
             e.printStackTrace();
