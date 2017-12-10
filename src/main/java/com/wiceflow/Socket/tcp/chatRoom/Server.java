@@ -145,7 +145,7 @@ public class Server {
                 sendOther(this.receive());
                 boolean i = isConnected();
                 if (!i){
-                    System.out.println(this.name + "客户端关闭");
+                    System.out.println(this.name + " 客户端关闭");
                 }
             }
         }

@@ -6,6 +6,7 @@ import java.net.Socket;
 
 /**
  * Created by BF on 2017/9/26.
+ * 获取对应客户端从服务器接收的数据
  */
 public class Receive implements Runnable {
 

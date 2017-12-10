@@ -9,6 +9,8 @@ public class TestString {
         String str = new String("abcd");
         String str2 = new String("abcd");
 
+        byte[] a = new byte[2];
+        Byte b =  new Byte(String.valueOf(22));
         //equals 比较内容是否相等
         System.out.println(str.equals(str2));
 
@@ -16,8 +18,8 @@ public class TestString {
         String str3 = "  aaab  ";
         System.out.println(str3);
         System.out.println(str3.trim());
-        String a = "abc";
-        String b = "abc";
-        System.out.println(a==b);
+        //String a = "abc";
+        //String b = "abc";
+        //System.out.println(a==b);
     }
 }

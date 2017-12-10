@@ -38,5 +38,6 @@ public class MyHashSet {
         set.add("aaa");
         set.add(new String("aaa"));
         System.out.println(set.size());
+
     }
 }

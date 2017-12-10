@@ -1,5 +1,7 @@
 package com.wiceflow.collection.List.myLinkList;
 
+import java.util.Scanner;
+
 /**
  * Created by BF on 2017/11/5.
  * 模拟实现LinkList
@@ -46,7 +48,8 @@ public class MyLinkList {
         }
         size++;
     }
-
+    static class aa{}
+    public class vbv{}
     /**
      * 获取链表为位置中的值
      * @param index
@@ -58,6 +61,7 @@ public class MyLinkList {
         for (int i=0;i<index;i++){
             n = n.getNext();
         }
+
         return n.getObject();
     }
 
