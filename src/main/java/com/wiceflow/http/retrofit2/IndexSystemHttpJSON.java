@@ -2,6 +2,8 @@ package com.wiceflow.http.retrofit2;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /**
@@ -11,6 +13,16 @@ import retrofit2.http.POST;
  */
 public interface IndexSystemHttpJSON {
 
-    @POST("ajax.php?a=fy&f=auto&t=auto&w=hello%20world")
-    Call<ResponseBody> getJSON();
+    // 这的POST URL会拼上Retrofit中的Url
+    @POST("translate?doctype=json&jsonversion=&type=&keyfrom=&model=&mid=&imei=&vendor=&screen=&ssid=&network=&abtest=")
+    // 这里表示这是一个Form表单的意思 因为这里的例子是翻译，所有要传输一个字段到服务器，用@Field标记
+    @FormUrlEncoded
+    // 这里的返回值是一个JavaBean类 具体要返回什么类型的在Call中设置泛型
+    Call<Translationl> getJSONByForm(@Field("i") String targetSentence);
+
+    @POST("translate?doctype=json&jsonversion=&type=&keyfrom=&model=&mid=&imei=&vendor=&screen=&ssid=&network=&abtest=")
+    @FormUrlEncoded
+    // 这里返回的是Body结构体，可以取出字符串，例如你不想让retrofit帮你解析JSON字符串，就可以用这个返回值
+    // String str = new String (ResponseBody.body.bytes())
+    Call<ResponseBody> getJSON(@Field("i") String targetSentence);
 }

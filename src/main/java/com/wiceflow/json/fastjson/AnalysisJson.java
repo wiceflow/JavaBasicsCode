@@ -1,18 +1,11 @@
 package com.wiceflow.json.fastjson;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.wiceflow.Proxy.extendOrPolymerization.A;
-import com.wiceflow.json.fastjson.po.AMPMPortSpeed;
-import com.wiceflow.json.fastjson.po.ArterialTrafficList;
 import com.wiceflow.json.fastjson.po.Basic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by duxin on 2017/12/7.
