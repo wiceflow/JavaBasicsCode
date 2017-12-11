@@ -1,4 +1,4 @@
-package com.wiceflow.hibernate;
+package com.wiceflow.frame.hibernate;
 
 import javax.persistence.*;
 

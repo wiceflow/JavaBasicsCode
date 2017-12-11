@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.wiceflow.hibernate.UserEntity" table="user" schema="public" catalog="testHibernate">
+    <class name="com.wiceflow.frame.hibernate.UserEntity" table="user" schema="public" catalog="testHibernate">
         <id name="id">
             <column name="id" sql-type="char(255)"/>
         </id>

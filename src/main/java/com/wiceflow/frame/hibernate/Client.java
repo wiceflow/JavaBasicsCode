@@ -1,10 +1,8 @@
-package com.wiceflow.hibernate;
+package com.wiceflow.frame.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.util.Date;
 
 /**
  * Created by duxin on 2017/12/7.
