@@ -2,6 +2,7 @@ package com.wiceflow.json.fastjson;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.wiceflow.json.fastjson.po.AMPMPortSpeed;
 import com.wiceflow.json.fastjson.po.Basic;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,9 +46,7 @@ public class AnalysisJson {
             // 开启事务
             session.beginTransaction();
             session.save(basic);
-            //Basic basic1 = session.get(Basic.class,3);
-            //AMPMPortSpeed a = basic1.getAMPMPortSpeed();
-            //System.out.println(a.getDistrictName().length());
+           // Basic basic1 = session.get(Basic.class,8);
             //System.out.println(basic1.toString());
             session.getTransaction().commit();
         }catch (Exception e) {

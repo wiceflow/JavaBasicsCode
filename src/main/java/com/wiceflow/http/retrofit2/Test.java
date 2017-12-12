@@ -51,7 +51,7 @@ public class Test {
                 long endTime = System.currentTimeMillis();// 结束时间
                 System.out.println("时间为： " + (endTime-startTime1));
             }
-            // 请求失败函数
+
             @Override
             public void onFailure(Call<Translationl> call, Throwable throwable) {
                 if (call.isCanceled()) {

@@ -20,8 +20,7 @@ public class SimpleExample {
 
         Scheduler sched = sf.getScheduler();
 
-
-        // 通过过JobDetail封装HelloJob，同时指定Job在Scheduler中所属组及名称，这里，组名为group1，而名称为job1。
+        // 通过过JobDetail封装RunJob，同时指定Job在Scheduler中所属组及名称，这里，组名为group1，而名称为job1。
         JobDetail job = newJob(RunJob.class).withIdentity("job1", "group1").build();
 
         // 创建一个SimpleTrigger实例，指定该Trigger在Scheduler中所属组及名称。
@@ -33,6 +32,7 @@ public class SimpleExample {
 
         // 注册并进行调度
         sched.scheduleJob(job, trigger);
+        SchedulerContext sc = sched.getContext();
         // 启动调度器
         sched.start();
 

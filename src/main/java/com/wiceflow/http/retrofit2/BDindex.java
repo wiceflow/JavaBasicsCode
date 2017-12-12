@@ -119,6 +119,10 @@ public class BDindex {
         Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startNow()
                 .withSchedule(cronScheduleBuilder).build();
 
+//        CronTrigger cronTrigger = TriggerBuilder.newTrigger()
+//                .withIdentity("trigger1","group1").withSchedule(cronScheduleBuilder).build();
+
+
         // 注册并进行调度
         scheduler.scheduleJob(job, trigger);
         // 启动调度器
