@@ -1,6 +1,5 @@
 package com.wiceflow.json.fastjson.po;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import javax.persistence.Basic;
 
@@ -36,18 +35,6 @@ public class AMPMPortSpeed{
     private double PMSpeedMOM;
     // 晚高峰同比(+,-)
     private double PMSpeedYOY;
-
-    private int pid;
-
-    @Basic
-    @Column(name = "pid")
-    public int getPid() {
-        return pid;
-    }
-
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

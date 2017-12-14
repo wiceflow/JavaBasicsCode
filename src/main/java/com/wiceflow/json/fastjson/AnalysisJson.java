@@ -2,8 +2,7 @@ package com.wiceflow.json.fastjson;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.wiceflow.json.fastjson.po.AMPMPortSpeed;
-import com.wiceflow.json.fastjson.po.Basic;
+import com.wiceflow.json.fastjson.po.General;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -21,7 +20,8 @@ public class AnalysisJson {
 
 //        AMPMPortSpeed a = JSON.parseObject(o.toJSONString(),AMPMPortSpeed.class);
 
-        Basic basic = JSON.parseObject(jsonString,Basic.class);
+        General basic = JSON.parseObject(jsonString,General.class);
+        System.out.println(basic.toString());
 //        AMPMPortSpeed b = basic.getAMPMPortSpeed();
         //System.out.println(b);
         //System.out.println(a);
@@ -35,28 +35,27 @@ public class AnalysisJson {
 //        }
 
 
-        //System.out.println(basic.toString());
 
-        Configuration cfg = new Configuration().configure();
-        SessionFactory sessionFactory = cfg.buildSessionFactory();
-        Session session = null;
-        try{
-            // 开启hibernate session
-            session = sessionFactory.openSession();
-            // 开启事务
-            session.beginTransaction();
-            session.save(basic);
-           // Basic basic1 = session.get(Basic.class,8);
-            //System.out.println(basic1.toString());
-            session.getTransaction().commit();
-        }catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        }finally {
-            if (session!=null){
-                session.close();
-            }
-        }
+//        Configuration cfg = new Configuration().configure();
+//        SessionFactory sessionFactory = cfg.buildSessionFactory();
+//        Session session = null;
+//        try{
+//            // 开启hibernate session
+//            session = sessionFactory.openSession();
+//            // 开启事务
+//            session.beginTransaction();
+//            session.save(basic);
+//           // Basic basic1 = session.get(Basic.class,8);
+//            //System.out.println(basic1.toString());
+//            session.getTransaction().commit();
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//            session.getTransaction().rollback();
+//        }finally {
+//            if (session!=null){
+//                session.close();
+//            }
+//        }
 
     }
 }

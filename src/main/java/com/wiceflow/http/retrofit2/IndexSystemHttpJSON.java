@@ -20,9 +20,10 @@ public interface IndexSystemHttpJSON {
     // 这里的返回值是一个JavaBean类 具体要返回什么类型的在Call中设置泛型
     Call<Translationl> getJSONByForm(@Field("i") String targetSentence);
 
-    @POST("translate?doctype=json&jsonversion=&type=&keyfrom=&model=&mid=&imei=&vendor=&screen=&ssid=&network=&abtest=")
+    //@POST("translate?doctype=json&jsonversion=&type=&keyfrom=&model=&mid=&imei=&vendor=&screen=&ssid=&network=&abtest=")
     @FormUrlEncoded
+    @POST("TrafficIndexFusion/traffic/GetWeekReportData")
     // 这里返回的是Body结构体，可以取出字符串，例如你不想让retrofit帮你解析JSON字符串，就可以用这个返回值
     // String str = new String (ResponseBody.body.bytes())
-    Call<ResponseBody> getJSON(@Field("i") String targetSentence);
+    Call<ResponseBody> getJSON(@Field("date") String date);
 }

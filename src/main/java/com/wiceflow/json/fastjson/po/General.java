@@ -1,9 +1,11 @@
 package com.wiceflow.json.fastjson.po;
 
+import com.wiceflow.json.fastjson.hipo.*;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -15,8 +17,8 @@ import java.util.Set;
  * 周报接口po
  */
 @Entity
-@Table(name = "basic", schema = "public", catalog = "indexSystem")
-public class Basic {
+@Table(name = "\"General\"", schema = "public", catalog = "indexSystem")
+public class General {
     // 主键
     private int id;
     // 口岸早晚高峰 实体
@@ -79,7 +81,8 @@ public class Basic {
     private double WholeSpeedPeakYOY;
     // 整个交通情况Set集合
     private Set<WholeTrafficList> WholeTrafficList = new HashSet<WholeTrafficList>();
-
+    // Basic表ID
+    private int bId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -314,63 +317,73 @@ public class Basic {
     public Set<ArterialTrafficList> getArterialTrafficList() {
         return ArterialTrafficList;
     }
-    public void setArterialTrafficList(Set<com.wiceflow.json.fastjson.po.ArterialTrafficList> arterialTrafficList) {
+    public void setArterialTrafficList(Set<ArterialTrafficList> arterialTrafficList) {
         ArterialTrafficList = arterialTrafficList;
     }
 
     @OneToMany
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "\"pId\"")
-    public Set<com.wiceflow.json.fastjson.po.CrossTrafficList> getCrossTrafficList() {
+    public Set<CrossTrafficList> getCrossTrafficList() {
         return CrossTrafficList;
     }
-    public void setCrossTrafficList(Set<com.wiceflow.json.fastjson.po.CrossTrafficList> crossTrafficList) {
+    public void setCrossTrafficList(Set<CrossTrafficList> crossTrafficList) {
         CrossTrafficList = crossTrafficList;
     }
 
     @OneToMany
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "\"pId\"")
-    public Set<com.wiceflow.json.fastjson.po.DistrictTrafficList> getDistrictTrafficList() {
+    public Set<DistrictTrafficList> getDistrictTrafficList() {
         return DistrictTrafficList;
     }
-    public void setDistrictTrafficList(Set<com.wiceflow.json.fastjson.po.DistrictTrafficList> districtTrafficList) {
+    public void setDistrictTrafficList(Set<DistrictTrafficList> districtTrafficList) {
         DistrictTrafficList = districtTrafficList;
     }
 
     @OneToMany
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "\"pId\"")
-    public Set<com.wiceflow.json.fastjson.po.ParkTrafficList> getParkTrafficList() {
+    public Set<ParkTrafficList> getParkTrafficList() {
         return ParkTrafficList;
     }
-    public void setParkTrafficList(Set<com.wiceflow.json.fastjson.po.ParkTrafficList> parkTrafficList) {
+    public void setParkTrafficList(Set<ParkTrafficList> parkTrafficList) {
         ParkTrafficList = parkTrafficList;
     }
 
     @OneToMany
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "\"pId\"")
-    public Set<com.wiceflow.json.fastjson.po.SectTrafficList> getSectTrafficList() {
+    public Set<SectTrafficList> getSectTrafficList() {
         return SectTrafficList;
     }
-    public void setSectTrafficList(Set<com.wiceflow.json.fastjson.po.SectTrafficList> sectTrafficList) {
+    public void setSectTrafficList(Set<SectTrafficList> sectTrafficList) {
         SectTrafficList = sectTrafficList;
     }
 
     @OneToMany
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "\"pId\"")
-    public Set<com.wiceflow.json.fastjson.po.WholeTrafficList> getWholeTrafficList() {
+    public Set<WholeTrafficList> getWholeTrafficList() {
         return WholeTrafficList;
     }
-    public void setWholeTrafficList(Set<com.wiceflow.json.fastjson.po.WholeTrafficList> wholeTrafficList) {
+    public void setWholeTrafficList(Set<WholeTrafficList> wholeTrafficList) {
         WholeTrafficList = wholeTrafficList;
+    }
+
+    @Basic
+    @Column(name = "\"bId\"", nullable = false)
+    public int getbId() {
+        return bId;
+    }
+    public void setbId(int bId) {
+        this.bId = bId;
     }
 
     @Override
     public String toString() {
-        return "Basic{" +
+        return "General{" +
+                "id=" + id +
                 ", AMPMPortSpeed=" + AMPMPortSpeed +
                 ", AMPeakWholeIndex=" + AMPeakWholeIndex +
                 ", AMPeakWholeSpeed=" + AMPeakWholeSpeed +
@@ -401,6 +414,7 @@ public class Basic {
                 ", WholeSpeedPeakMOM=" + WholeSpeedPeakMOM +
                 ", WholeSpeedPeakYOY=" + WholeSpeedPeakYOY +
                 ", WholeTrafficList=" + WholeTrafficList +
+                ", bId=" + bId +
                 '}';
     }
 }

@@ -17,7 +17,7 @@
 
         <property name="hibernate.event.merge.entity_copy_observer">allow</property>
         <!-- 映射文件 -->
-        <mapping class="com.wiceflow.json.fastjson.po.Basic"/>
+        <mapping class="com.wiceflow.json.fastjson.po.General"/>
         <mapping class="com.wiceflow.json.fastjson.po.AMPMPortSpeed"/>
         <mapping class="com.wiceflow.json.fastjson.po.ArterialTrafficList"/>
         <mapping class="com.wiceflow.json.fastjson.po.CrossTrafficList"/>
@@ -25,5 +25,11 @@
         <mapping class="com.wiceflow.json.fastjson.po.ParkTrafficList"/>
         <mapping class="com.wiceflow.json.fastjson.po.SectTrafficList"/>
         <mapping class="com.wiceflow.json.fastjson.po.WholeTrafficList"/>
+
+        <mapping class="com.wiceflow.json.fastjson.po.TableForJSON"/>
+        <mapping class="com.wiceflow.json.fastjson.po.AllTrafficColumn"/>
+        <mapping class="com.wiceflow.json.fastjson.po.TrafficInAll"/>
+        <mapping class="com.wiceflow.json.fastjson.po.SecondLineTraffic"/>
+        <mapping class="com.wiceflow.json.fastjson.po.BasicCTwo"/>
     </session-factory>
 </hibernate-configuration>

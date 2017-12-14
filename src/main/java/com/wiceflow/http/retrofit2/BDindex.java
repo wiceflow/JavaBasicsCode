@@ -1,9 +1,11 @@
 package com.wiceflow.http.retrofit2;
 
 import com.alibaba.fastjson.JSON;
-import com.wiceflow.frame.quartz2.Quartz2Util;
+import com.alibaba.fastjson.JSONObject;
 import com.wiceflow.frame.quartz2.RunJob;
-import com.wiceflow.json.fastjson.po.Basic;
+import com.wiceflow.json.fastjson.po.BasicCTwo;
+import com.wiceflow.json.fastjson.po.TableForJSON;
+import com.wiceflow.json.fastjson.po.*;
 import okhttp3.ResponseBody;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,12 +19,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
 import java.util.Date;
 
+import static com.wiceflow.json.fastjson.po.ArrayTurnPO.trun;
 import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 /**
@@ -34,8 +34,8 @@ public class BDindex {
 
     private static final Logger _LOG = LoggerFactory.getLogger(BDindex.class);
 
-    static private Basic translateObject(String jsonString) {
-        Basic basic = JSON.parseObject(jsonString, Basic.class);
+    static private General translateObject(String jsonString) {
+        General basic = JSON.parseObject(jsonString, General.class);
         return basic;
     }
 
@@ -46,24 +46,30 @@ public class BDindex {
 
     static public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
-                // TODO url
-                .baseUrl("http://fanyi.youdao.com/")
-                // 设置使用Gson解析(记得加入依赖)
-                // TODO 最终还需要测试那个解析快 暂时定用fastJSON
-//                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://202.104.124.214:13401/")
                 .build();
         IndexSystemHttpJSON ishj = retrofit.create(IndexSystemHttpJSON.class);
-        // TODO 具体传值
-        Call<ResponseBody> call = ishj.getJSON("I love you");
+        Call<ResponseBody> call = ishj.getJSON("20171212");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    //Basic basic = translateObject(new String(response.body().bytes()));
-                    //saveDB(basic);
-                    Translationl t = getTranslation1(new String(response.body().bytes()));
-                    System.out.println(t.toString());
-                } catch (IOException e) {
+                    JSONObject json = JSON.parseObject(new String(response.body().bytes()));
+                    JSONObject json1 = json.getJSONObject("table");
+                    table table = JSON.parseObject(json1.toJSONString(), table.class);
+                    TableForJSON t = trun(table);
+                    System.out.println(t);
+                    JSONObject json2 = json.getJSONObject("general");
+                    General genera = JSON.parseObject(json2.toJSONString(), General.class);
+
+                    BasicCTwo basic = new BasicCTwo();
+
+                    basic.setGeneral(genera);
+                    basic.setTfj(t);
+                    basic.setPeriod(t.getPeriod());
+
+                    saveDB(basic);
+                } catch (Exception e) {
                     _LOG.error("newString转换字符串出错");
                     e.printStackTrace();
                 }
@@ -130,24 +136,24 @@ public class BDindex {
     }
 
 
-//    static public void saveDB(Basic basic) {
-//        Configuration cfg = new Configuration().configure();
-//        SessionFactory sessionFactory = cfg.buildSessionFactory();
-//        Session session = null;
-//        try {
-//            // 开启hibernate session
-//            session = sessionFactory.openSession();
-//            // 开启事务
-//            session.beginTransaction();
-//            session.save(basic);
-//            session.getTransaction().commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            session.getTransaction().rollback();
-//        } finally {
-//            if (session != null) {
-//                session.close();
-//            }
-//        }
-//    }
+    static public void saveDB(BasicCTwo basic) {
+        Configuration cfg = new Configuration().configure();
+        SessionFactory sessionFactory = cfg.buildSessionFactory();
+        Session session = null;
+        try {
+            // 开启hibernate session
+            session = sessionFactory.openSession();
+            // 开启事务
+            session.beginTransaction();
+            session.save(basic);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
