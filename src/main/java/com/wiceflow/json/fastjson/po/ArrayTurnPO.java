@@ -31,22 +31,16 @@ public class ArrayTurnPO {
         for (int x=0;x<allTraffic.length;x++){
             switch (x){
                 case 0:
-                    System.out.println(x);
                     a.setWeek(allTraffic[x][1]);break;
                 case 1:
-                    System.out.println(x);
                     a.setStartDate(Integer.parseInt(allTraffic[x][1]));break;
                 case 2:
-                    System.out.println(x);
                     a.setFullTimeSpeed(Double.parseDouble(allTraffic[x][1]));break;
                 case 3:
-                    System.out.println(x);
                     a.setEarlySpeed(Double.parseDouble(allTraffic[x][1]));break;
                 case 4:
-                    System.out.println(x);
                     a.setLateSpeed(Double.parseDouble(allTraffic[x][1]));break;
                 case 5:
-                    System.out.println(x);
                     a.setPeakSpeed(Double.parseDouble(allTraffic[x][1]));break;
                 case 6:
                     a.setCentralCityPeakSpeed(Double.parseDouble(allTraffic[x][1]));break;

@@ -10,6 +10,9 @@ import javax.persistence.*;
 @Table(name = "\"AllTrafficColumn\"", schema = "public", catalog = "indexSystem")
 public class AllTrafficColumn {
     private int id;
+    /**
+     * 周次
+     */
     private String week;
     private int startDate;
     private double fullTimeSpeed;
@@ -17,8 +20,8 @@ public class AllTrafficColumn {
     private double lateSpeed;
     private double peakSpeed;
     private double centralCityPeakSpeed;
-    private Double lastYearPeakSpeed;
-    private Double lastYearCentralCityPeakSpeed;
+    private double lastYearPeakSpeed;
+    private double lastYearCentralCityPeakSpeed;
     private String cityPeakSpeedChain;
     private String cityPeakSpeedYoy;
     private String centralCityPeakSpeedChain;
@@ -35,6 +38,10 @@ public class AllTrafficColumn {
         this.id = id;
     }
 
+    /**
+     * 获取周次
+     * @return
+     */
     @Basic
     @Column(name = "\"Week\"", nullable = false, length = 50)
     public String getWeek() {
@@ -100,19 +107,19 @@ public class AllTrafficColumn {
 
     @Basic
     @Column(name = "\"LastYearPeakSpeed\"", nullable = true, precision = 0)
-    public Double getLastYearPeakSpeed() {
+    public double getLastYearPeakSpeed() {
         return lastYearPeakSpeed;
     }
-    public void setLastYearPeakSpeed(Double lastYearPeakSpeed) {
+    public void setLastYearPeakSpeed(double lastYearPeakSpeed) {
         this.lastYearPeakSpeed = lastYearPeakSpeed;
     }
 
     @Basic
     @Column(name = "\"LastYearCentralCityPeakSpeed\"", nullable = true, precision = 0)
-    public Double getLastYearCentralCityPeakSpeed() {
+    public double getLastYearCentralCityPeakSpeed() {
         return lastYearCentralCityPeakSpeed;
     }
-    public void setLastYearCentralCityPeakSpeed(Double lastYearCentralCityPeakSpeed) {
+    public void setLastYearCentralCityPeakSpeed(double lastYearCentralCityPeakSpeed) {
         this.lastYearCentralCityPeakSpeed = lastYearCentralCityPeakSpeed;
     }
 

@@ -20,10 +20,10 @@ public class BasicCTwo {
     private Set<TableForJSON> tables = new HashSet<>();
     private Set<General> generals = new HashSet<>();
     // 期数
-    private String Period;
-
+    private String period;
+    // 日期
+    private String date;
     private General general;
-
     private TableForJSON tfj;
 
     @Id
@@ -39,10 +39,10 @@ public class BasicCTwo {
     @Basic
     @Column(name = "\"Period\"")
     public String getPeriod() {
-        return Period;
+        return period;
     }
     public void setPeriod(String period) {
-        Period = period;
+        this.period = period;
     }
 
     @OneToMany
@@ -84,13 +84,23 @@ public class BasicCTwo {
         tables.add(tfj);
     }
 
+    @Basic
+    @Column(name = "date")
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "BasicCTwo{" +
                 "id=" + id +
                 ", tables=" + tables +
                 ", generals=" + generals +
-                ", Period='" + Period + '\'' +
+                ", period='" + period + '\'' +
+                ", date='" + date + '\'' +
                 ", general=" + general +
                 ", tfj=" + tfj +
                 '}';

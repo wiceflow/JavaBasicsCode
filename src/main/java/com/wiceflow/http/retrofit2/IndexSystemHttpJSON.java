@@ -1,5 +1,5 @@
 package com.wiceflow.http.retrofit2;
-
+import com.wiceflow.json.fastjson.po.General;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -18,7 +18,7 @@ public interface IndexSystemHttpJSON {
     // 这里表示这是一个Form表单的意思 因为这里的例子是翻译，所有要传输一个字段到服务器，用@Field标记
     @FormUrlEncoded
     // 这里的返回值是一个JavaBean类 具体要返回什么类型的在Call中设置泛型
-    Call<Translationl> getJSONByForm(@Field("i") String targetSentence);
+    Call<General> getJSONByForm(@Field("i") String targetSentence);
 
     //@POST("translate?doctype=json&jsonversion=&type=&keyfrom=&model=&mid=&imei=&vendor=&screen=&ssid=&network=&abtest=")
     @FormUrlEncoded

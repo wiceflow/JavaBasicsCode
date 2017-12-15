@@ -1,4 +1,4 @@
-package com.wiceflow;
+package com.wiceflow.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

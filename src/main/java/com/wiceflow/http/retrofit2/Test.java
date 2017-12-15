@@ -2,23 +2,14 @@ package com.wiceflow.http.retrofit2;
 
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.wiceflow.json.fastjson.po.Basic;
+import com.wiceflow.json.fastjson.po.General;
 import okhttp3.ResponseBody;
-import org.quartz.SchedulerException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.wiceflow.http.retrofit2.BDindex.timer;
-
-
 /**
  * Created by BF on 2017/12/10.
  * 测试接口是否正常运行
@@ -39,21 +30,21 @@ public class Test {
         IndexSystemHttpJSON ishj = retrofit.create(IndexSystemHttpJSON.class);
         final long startTime1 = System.currentTimeMillis();   // 获取开始时间
         // 对 发送请求 进行封装
-        Call<Translationl> call = ishj.getJSONByForm("I love you");
+        Call<General> call = ishj.getJSONByForm("I love you");
 
-        call.enqueue(new Callback<Translationl>() {
+        call.enqueue(new Callback<General>() {
             // 成功函数
             @Override
-            public void onResponse(Call<Translationl> call, Response<Translationl> response) {
+            public void onResponse(Call<General> call, Response<General> response) {
                 // response 就是我们在接口中定义的泛型返回值 如果我们定义了一个bean 则response.body()就表示这个bean
-                Translationl t = response.body();
+                General t = response.body();
                 System.out.println(response.body().toString());
                 long endTime = System.currentTimeMillis();// 结束时间
                 System.out.println("时间为： " + (endTime-startTime1));
             }
 
             @Override
-            public void onFailure(Call<Translationl> call, Throwable throwable) {
+            public void onFailure(Call<General> call, Throwable throwable) {
                 if (call.isCanceled()) {
                     System.out.println("请求取消");
                 } else {
