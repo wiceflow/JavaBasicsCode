@@ -19,6 +19,6 @@ public class RunJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         String date = String.valueOf(returnIntDate());
         System.out.println(date);
-        getData("20171212",true);
+        getData(date,true);
     }
 }

@@ -1,10 +1,10 @@
 package com.wiceflow;
-import com.wiceflow.json.fastjson.po.AllTrafficColumn;
 import org.quartz.SchedulerException;
-
 import java.text.ParseException;
+
+import static com.wiceflow.http.retrofit2.BDindex.ObtainData;
 import static com.wiceflow.http.retrofit2.BDindex.getData;
-import static com.wiceflow.http.retrofit2.BDindex.timer;
+
 
 
 /**
@@ -13,9 +13,10 @@ import static com.wiceflow.http.retrofit2.BDindex.timer;
  */
 public class Test {
     public static void main(String[] args) throws ParseException, SchedulerException {
-        //System.out.println(String.valueOf((char) 29));
 
-        getData("20171201",false);
+
+        getData("20170106",true);
         //timer();
+        //ObtainData();
     }
 }

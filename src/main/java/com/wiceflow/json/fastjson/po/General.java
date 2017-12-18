@@ -1,9 +1,6 @@
 package com.wiceflow.json.fastjson.po;
-
-import com.wiceflow.json.fastjson.hipo.*;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
-
 import javax.persistence.*;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -83,6 +80,8 @@ public class General {
     private Set<WholeTrafficList> WholeTrafficList = new HashSet<WholeTrafficList>();
     // Basic表ID
     private int bId;
+    // 原本是一对一关系，JSON字段有空缺 改为一对多
+    private Set<AMPMPortSpeed> ampmPortSpeeds = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,14 +93,13 @@ public class General {
         this.id = id;
     }
 
-    @OneToOne
-    @Cascade(value = CascadeType.ALL)
-    @JoinColumn(name="id")
-    public com.wiceflow.json.fastjson.po.AMPMPortSpeed getAMPMPortSpeed() {
+    @Transient
+    public AMPMPortSpeed getAMPMPortSpeed() {
         return AMPMPortSpeed;
     }
-    public void setAMPMPortSpeed(com.wiceflow.json.fastjson.po.AMPMPortSpeed AMPMPortSpeed) {
+    public void setAMPMPortSpeed(AMPMPortSpeed AMPMPortSpeed) {
         this.AMPMPortSpeed = AMPMPortSpeed;
+        ampmPortSpeeds.add(AMPMPortSpeed);
     }
 
     @javax.persistence.Basic
@@ -221,7 +219,7 @@ public class General {
         this.PMWholeCrossMOM = PMWholeCrossMOM;
     }
 
-    @javax.persistence.Basic
+    @Basic
     @Column(name = "\"PMWholeCrossYOY\"")
     public double getPMWholeCrossYOY() {
         return PMWholeCrossYOY;
@@ -378,6 +376,19 @@ public class General {
     }
     public void setbId(int bId) {
         this.bId = bId;
+    }
+
+    @OneToMany
+    @Cascade(value = CascadeType.ALL)
+    @JoinColumn(name = "\"gId\"")
+    public Set<AMPMPortSpeed> getAmpmPortSpeeds() {
+        return ampmPortSpeeds;
+    }
+    public void setAmpmPortSpeeds(Set<AMPMPortSpeed> ampmPortSpeeds) {
+        this.ampmPortSpeeds = ampmPortSpeeds;
+        if (ampmPortSpeeds.iterator().hasNext()){
+            AMPMPortSpeed = ampmPortSpeeds.iterator().next();
+        }
     }
 
     @Override

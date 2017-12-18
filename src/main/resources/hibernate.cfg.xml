@@ -25,7 +25,6 @@
         <mapping class="com.wiceflow.json.fastjson.po.ParkTrafficList"/>
         <mapping class="com.wiceflow.json.fastjson.po.SectTrafficList"/>
         <mapping class="com.wiceflow.json.fastjson.po.WholeTrafficList"/>
-
         <mapping class="com.wiceflow.json.fastjson.po.TableForJSON"/>
         <mapping class="com.wiceflow.json.fastjson.po.AllTrafficColumn"/>
         <mapping class="com.wiceflow.json.fastjson.po.TrafficInAll"/>

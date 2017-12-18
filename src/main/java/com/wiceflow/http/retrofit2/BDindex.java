@@ -8,18 +8,19 @@ import com.wiceflow.json.fastjson.po.TableForJSON;
 import com.wiceflow.json.fastjson.po.*;
 import com.wiceflow.util.QuartzUtil;
 import okhttp3.ResponseBody;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import java.util.Date;
+
+import java.util.List;
 
 import static com.wiceflow.json.fastjson.po.ArrayTurnPO.trun;
 import static com.wiceflow.util.RetrofitUtil.getCallResponseBody;
@@ -55,6 +56,9 @@ public class BDindex {
                     TableForJSON t = trun(table);
                     JSONObject json2 = json.getJSONObject("general");
                     General genera = JSON.parseObject(json2.toJSONString(), General.class);
+//                    JSONObject json3 = json2.getJSONObject("AMPMPortSpeed");
+//                    AMPMPortSpeed a = JSON.parseObject(json3.toJSONString(),AMPMPortSpeed.class);
+//                    System.out.println(a);
 
                     BasicCTwo basic = new BasicCTwo();
 
@@ -62,11 +66,11 @@ public class BDindex {
                     basic.setTfj(t);
                     basic.setPeriod(t.getPeriod());
                     basic.setDate(date);
-                    System.out.println(basic.toString());
                     if (flag) {
                         saveDB(basic);
+                        System.out.println("日期为：" + basic.getDate() + "的数据为：" + basic.toString());
                     }
-                    ObtainData();
+                    //ObtainData();
                 } catch (Exception e) {
                     _LOG.error("newString转换字符串出错");
                     e.printStackTrace();
@@ -119,7 +123,7 @@ public class BDindex {
         // 通过过JobDetail封装HelloJob，同时指定Job在Scheduler中所属组及名称，这里，组名为group1，而名称为job1。
         //JobDetail job = newJob(RunJob.class).withIdentity("job1", "group1").build();
         // 创建一个CronScheduleBuilder 实例，指定该Trigger在Scheduler中所属组及名称。
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 03 15 ? * 6");
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule("0 34 15 * * ?");
         // 接着设置调度的时间规则.当前时间运行
         Trigger trigger = quartzUtil.getTrigger("trigger1","griop1",cronScheduleBuilder);
 //        Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startNow()
@@ -158,7 +162,7 @@ public class BDindex {
         }
     }
     static public BasicCTwo ObtainData(){
-        String ccc = "50";
+        String ccc = "2";
         Configuration cfg = new Configuration().configure();
         SessionFactory sessionFactory = cfg.buildSessionFactory();
         Session session = null;
@@ -166,13 +170,12 @@ public class BDindex {
             session = sessionFactory.openSession();
 //            BasicCTwo b = session.get(BasicCTwo.class,2);
 //            System.out.println(b.toString());
-//            Criteria c = session.createCriteria(BasicCTwo.class);
-//            c.add(Restrictions.eq("period","50"));
-//            List<BasicCTwo> bv = c.list();
-//            System.out.println(bv.get(0).toString());
-            BasicCTwo basicCTwo = (BasicCTwo) session.createQuery("select ap from BasicCTwo as ap where ap.id = (select  max(bean.id) from BasicCTwo bean ) ").uniqueResult();
-
-            System.out.println(basicCTwo);
+            Criteria c = session.createCriteria(BasicCTwo.class);
+            c.add(Restrictions.eq("period","2"));
+           List<BasicCTwo> bv = c.list();
+            System.out.println(bv.get(0).toString());
+           // BasicCTwo basicCTwo = (BasicCTwo) session.createQuery("select ap from BasicCTwo as ap where ap.id = (select  max(bean.id) from BasicCTwo bean ) ").uniqueResult();
+  //          System.out.println(basicCTwo);
         }catch (Exception e){
             e.printStackTrace();
         }finally {

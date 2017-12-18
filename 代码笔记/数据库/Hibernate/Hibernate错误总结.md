@@ -14,3 +14,5 @@ session中，而`Set`中的新对象会从数据库取自增`ID`这时候由于�
 ```java
 <prop key="hibernate.event.merge.entity_copy_observer">allow</prop>
 ```
+* 在一对多，多对多映射读取数据的时候，因为开启了懒加载方式，所以当对象嵌套使用时，如果只是利用`Hibernate`读取的一条数据并没有使用它，那么在过一段时间后使用就会报`no session`异常， 因为此时`session`已经关闭了。
+网上有很多办法，不过都会导致性能降级，我使用了一个比较笨的方法，在`PO`类中加入一个`toString`方法，在利用Hibernate取完数据后便执行以下`toString`方法，这样就会遍历整个嵌套对象，防止懒加载时因为`session`关闭而导致异常。

@@ -53,6 +53,7 @@ public class BasicCTwo {
     }
     public void setTables(Set<TableForJSON> tables) {
         this.tables = tables;
+        this.tfj = tables.iterator().next();
     }
 
     @OneToMany
@@ -63,6 +64,7 @@ public class BasicCTwo {
     }
     public void setGenerals(Set<General> generals) {
         this.generals = generals;
+        this.general = generals.iterator().next();
     }
 
     @Transient
@@ -97,8 +99,6 @@ public class BasicCTwo {
     public String toString() {
         return "BasicCTwo{" +
                 "id=" + id +
-                ", tables=" + tables +
-                ", generals=" + generals +
                 ", period='" + period + '\'' +
                 ", date='" + date + '\'' +
                 ", general=" + general +

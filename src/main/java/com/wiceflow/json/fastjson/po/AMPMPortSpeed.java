@@ -35,6 +35,8 @@ public class AMPMPortSpeed{
     private double PMSpeedMOM;
     // 晚高峰同比(+,-)
     private double PMSpeedYOY;
+    // 父ID
+    private int gId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +48,6 @@ public class AMPMPortSpeed{
         this.id = id;
     }
 
-    /**
-     * 一对多中是否不需要外键联系
-     * @return
-     */
     @Basic
     @Column(name = "\"AMLWSpeed\"")
     public double getAMLWSpeed()  {
@@ -148,6 +146,15 @@ public class AMPMPortSpeed{
     }
     public void setPMSpeedYOY(double PMSpeedYOY) {
         this.PMSpeedYOY = PMSpeedYOY;
+    }
+
+    @Basic
+    @Column(name = "\"gId\"")
+    public int getgId() {
+        return gId;
+    }
+    public void setgId(int gId) {
+        this.gId = gId;
     }
 
     @Override

@@ -1,6 +1,8 @@
 # PostgreSQL 学习笔记
 * 执行语句的时候记得末尾要加`;`
 * `PostgreSQL`<font color=red>是大小写敏感的，当在数据库用可视化界面建表和字段时候，`shell`会自动为大写的字段加上`“”`号，所以在代码中如果连接这个表或者字段也要在代码上加`“”`，可以利用转义符达成效果</font>
+
+
 ## 创建一个数据库
 `create database testdb;`
 ### 查看已存在的数据库  `\l` 是英文L
@@ -9,7 +11,11 @@
 删除数据库失败需要确认数据库是否关闭
 ## 切换数据库
 `\c` + 数据库名字
-
+## 重置数据表序列
+```SQL
+  ALTER SEQUENCE "AMPMPortSpeed_id_seq" RESTART WITH 1;
+```
+注意：当表名是大写的时候要加上双引号
 ### 创建表
     CREATE TABLE public.student2
     (
