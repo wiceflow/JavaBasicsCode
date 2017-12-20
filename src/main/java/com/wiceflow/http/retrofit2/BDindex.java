@@ -56,6 +56,9 @@ public class BDindex {
                     TableForJSON t = trun(table);
                     JSONObject json2 = json.getJSONObject("general");
                     General genera = JSON.parseObject(json2.toJSONString(), General.class);
+                    JSONObject json3 = json2.getJSONObject("AMPMPortSpeed");
+                    AMPMPortSpeed a = JSON.parseObject(json3.toJSONString(),AMPMPortSpeed.class);
+                    System.out.println(a.toString());
 //                    JSONObject json3 = json2.getJSONObject("AMPMPortSpeed");
 //                    AMPMPortSpeed a = JSON.parseObject(json3.toJSONString(),AMPMPortSpeed.class);
 //                    System.out.println(a);

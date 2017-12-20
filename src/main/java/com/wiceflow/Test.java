@@ -12,11 +12,23 @@ import static com.wiceflow.http.retrofit2.BDindex.getData;
  * 常用测试
  */
 public class Test {
-    public static void main(String[] args) throws ParseException, SchedulerException {
 
+}
+class Employee {
+    public int age;
+}
+class Main {
+    public static void changeEmployee(Employee employee)
+    {
+        employee = new Employee();
+        employee.age = 1000;
+    }
 
-        getData("20170106",true);
-        //timer();
-        //ObtainData();
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.age = 100;
+        changeEmployee(employee);
+        System.out.println(employee.age);
+
     }
 }
