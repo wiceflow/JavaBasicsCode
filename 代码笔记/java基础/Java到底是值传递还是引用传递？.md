@@ -47,11 +47,12 @@
     }
     foo(sb); // sb 没有被改变，还是 "iphone"。
 ```  
+### 重点理解为什么，第三个例子和第四个例子结果不同？  
 
+#### 下面是第三个例子的图解： 
 
-### 重点理解为什么，第三个例子和第四个例子结果不同？
-#### 下面是第三个例子的图解：
-<img src="transferimg/transfer3.jpg"/>
+<img src="transferimg/transfer3.jpg"/>  
+
 ##### `builder.append("4")`之后
 <img src="transferimg/transfer4.jpg"/>
 
