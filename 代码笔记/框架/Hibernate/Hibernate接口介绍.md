@@ -114,7 +114,9 @@ eg：
 ```
 还可以使用
 ```java
-  new SchemaExport(new AnnotationConfiguration().configure()).create(true,true);
-  第一个true代表是否在控制台打印出建表语句，第二个true代表是否在数据库中执行建表语句
+  StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateLearn.cfg.xml").build();
+  Metadata metadata = new MetadataSources(serviceRegistry).buildMetadata();
+  SchemaExport schemaExport = new SchemaExport();
+  schemaExport.create(EnumSet.of(TargetType.DATABASE), metadata);
 ```
 这种方法可以用来看一下建表的`SQL`是怎么样的。

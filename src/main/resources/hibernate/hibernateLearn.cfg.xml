@@ -1,0 +1,33 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- 设置数据库驱动 -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!-- 设置数据库URL -->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/testHibernate</property>
+        <!-- 数据库用户名 -->
+        <property name="connection.username">postgres</property>
+        <!-- 数据库密码 -->
+        <property name="connection.password">123456</property>
+        <!-- 指定对应数据库的方言，hibernate为了更好适配各种关系数据库，针对每种数据库都指定了一个方言dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+
+        <property name="hibernate.event.merge.entity_copy_observer">allow</property>
+        <!--<property name="hbm2ddl.auto">validate</property>-->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="show_sql">true</property>
+        <!-- 映射文件 -->
+        <!-- 一对一外键单向关联 -->
+        <!--<mapping class="com.wiceflow.frame.hibernate.oneToOne_uni_fk.Wife"/>-->
+        <!--<mapping class="com.wiceflow.frame.hibernate.oneToOne_uni_fk.Husband"/>-->
+        <!-- 一对一双向外键关联 -->
+        <!--<mapping class="com.wiceflow.frame.hibernate.oneToOne_bi_fk.Husband"/>-->
+        <!--<mapping class="com.wiceflow.frame.hibernate.oneToOne_bi_fk.Wife"/>-->
+        <!-- 一对一主键单向关联 -->
+        <mapping class="com.wiceflow.frame.hibernate.oneToOne_uni_pk.Husband"/>
+        <mapping class="com.wiceflow.frame.hibernate.oneToOne_uni_pk.Wife"/>
+    </session-factory>
+</hibernate-configuration>
