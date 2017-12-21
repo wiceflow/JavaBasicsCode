@@ -101,8 +101,6 @@ public class BasicCTwo {
                 "id=" + id +
                 ", period='" + period + '\'' +
                 ", date='" + date + '\'' +
-                ", general=" + general +
-                ", tfj=" + tfj +
                 '}';
     }
 }
