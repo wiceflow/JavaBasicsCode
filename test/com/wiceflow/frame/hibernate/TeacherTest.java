@@ -24,4 +24,5 @@ public class TeacherTest {
         // 当session关闭了，这个对象就没了，会报no session异常
         System.out.println(t);
     }
+
 }

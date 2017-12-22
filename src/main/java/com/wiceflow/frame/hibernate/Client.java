@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
  */
 public class Client {
     public static void main(String[] args) {
-        Configuration cfg = new Configuration().configure();
+        Configuration cfg = new Configuration().configure("hibernate/hibernateLearn.cfg.xml");
         SessionFactory sessionFactory = cfg.buildSessionFactory();
         Session session = null;
         try {
@@ -29,14 +29,18 @@ public class Client {
 //            tPK.setId(1);
 //            tPK.setName("杨燕妮");
             Teacher teacher = new Teacher();
+            Teacher teacher1 = new Teacher();
+            teacher1.setAge(18);
+            teacher1.setGender("生物");
+            teacher1.setName("文冰峰");
+
             teacher.setAge(18);
             teacher.setGender("英语");
-//            teacher.setTeacherPK(tPK);
+//          teacher.setTeacherPK(tPK);
             teacher.setName("杨燕妮");
             session.save(teacher);
-            System.out.println(teacher.getId());
-            System.out.println(teacher.getGender());
             teacher.setGender("语文");
+            session.save(teacher1);
             session.getTransaction().commit();
 
         } catch (Exception e) {
