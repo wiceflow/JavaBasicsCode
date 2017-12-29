@@ -138,15 +138,14 @@ public class ReadUtil {
         return cellvalue;
     }
 
-    public Set<String> readxlsx(String filepath){
+    public Set<String> readxlsx(){
         // set集合去重
         Set<String> start_end_line = new HashSet<>();
         try {
 //            String filepath = "F:\\换乘表.xlsx";
-            ReadUtil excelReader = new ReadUtil(filepath);
 
             // 对读取Excel表格内容测试
-            Map<Integer, Map<Integer,Object>> map = excelReader.readExcelContent();
+            Map<Integer, Map<Integer,Object>> map = readExcelContent();
             for (int i : map.keySet()){
                 Map<Integer,Object> a = map.get(i);
                 String startLine = (String) a.get(1);
