@@ -14,7 +14,7 @@ public class Test {
     public static void main(String[] args) {
         GetWaitingTime g = new GetWaitingTime();
 
-        int time = g.getWaitingTime(9,5);
+        int time = g.getWaitingTime(11,5);
         System.out.println(time);
     }
 }
