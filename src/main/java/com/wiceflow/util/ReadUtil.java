@@ -142,8 +142,6 @@ public class ReadUtil {
         // set集合去重
         Set<String> start_end_line = new HashSet<>();
         try {
-//            String filepath = "F:\\换乘表.xlsx";
-
             // 对读取Excel表格内容测试
             Map<Integer, Map<Integer,Object>> map = readExcelContent();
             for (int i : map.keySet()){
@@ -161,40 +159,39 @@ public class ReadUtil {
         }
         return start_end_line;
     }
-
     /**
      * 将1.0 变成1号线
      * @return
      */
-    private  String changeString(String s){
-        String sName = "";
+    private int changeString(String s){
+        int sName = 0;
         switch (s){
             case "1.0":
-                sName = "1号线";
+                sName = 1;
                 break;
             case "2.0":
-                sName = "2号线";
+                sName = 2;
                 break;
             case "3.0":
-                sName = "3号线";
+                sName = 3;
                 break;
             case "4.0":
-                sName = "4号线";
+                sName = 4;
                 break;
             case "5.0":
-                sName = "5号线";
+                sName = 5;
                 break;
             case "7.0":
-                sName = "7号线";
+                sName = 7;
                 break;
             case "9.0":
-                sName = "9号线";
+                sName = 9;
                 break;
             case "11.0":
-                sName = "11号线";
+                sName = 11;
                 break;
             default:
-                sName = "出错";
+                System.out.println("出错");
                 break;
         }
         return sName;

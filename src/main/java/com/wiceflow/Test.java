@@ -1,5 +1,8 @@
 package com.wiceflow;
 
+import com.wiceflow.companyLearn.subway.TransforMap.Dao;
+import com.wiceflow.companyLearn.subway.TransforMap.GetWaitingTime;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +12,9 @@ import java.util.Map;
  */
 public class Test {
     public static void main(String[] args) {
-        Map<String,Map<String,String>> map = new HashMap<>();
+        GetWaitingTime g = new GetWaitingTime();
+
+        int time = g.getWaitingTime(9,5);
+        System.out.println(time);
     }
 }

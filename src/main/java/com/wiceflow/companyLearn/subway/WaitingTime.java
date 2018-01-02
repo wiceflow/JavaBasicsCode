@@ -42,4 +42,14 @@ public class WaitingTime {
     public void setWaitingTime(double waitingTime) {
         this.waitingTime = waitingTime;
     }
+
+    @Override
+    public String toString() {
+        return "WaitingTime{" +
+                "id=" + id +
+                ", startLine=" + startLine +
+                ", endLine=" + endLine +
+                ", waitingTime=" + waitingTime +
+                '}';
+    }
 }
