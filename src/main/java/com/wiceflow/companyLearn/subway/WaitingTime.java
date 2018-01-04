@@ -13,6 +13,7 @@ public class WaitingTime {
     private int startLine;
     private int endLine;
     private double waitingTime;
+    private int version;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -42,14 +43,11 @@ public class WaitingTime {
     public void setWaitingTime(double waitingTime) {
         this.waitingTime = waitingTime;
     }
-
-    @Override
-    public String toString() {
-        return "WaitingTime{" +
-                "id=" + id +
-                ", startLine=" + startLine +
-                ", endLine=" + endLine +
-                ", waitingTime=" + waitingTime +
-                '}';
+    @Column(name = "version")
+    public int getVersion() {
+        return version;
+    }
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

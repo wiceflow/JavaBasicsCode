@@ -1,31 +1,30 @@
 package com.wiceflow.companyLearn.subway;
-
-
+import com.wiceflow.companyLearn.subway.TransforMap.Dao;
 import com.wiceflow.util.ReadUtil;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
  * Created by BF on 2017/12/29.
  */
 public class test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        Dao dao = new Dao();
         Configuration configuration = new Configuration().configure("company/hibernateCPY.cfg.xml");
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
-//        Query que = session.createQuery("from LineEntity");
-//        // 处理成Map形式
-//        List<LineEntity> lineEntitylist = que.list();
 
-//        Map<String,Integer> map = getLineName(lineEntitylist);
-        // 读取Excel表获取换乘路线，将中文名换成路线编号
-        List<WaitingTime> waitingTimeList = getWaitTime();
+        // 读取Excel表获取换乘路线，将中文名换成路线编号 TODO 在这里加入版本号
+        int version = dao.getLastVersion(5);
+        version++;
+        List<WaitingTime> waitingTimeList = getWaitTime(version);
         // 设置换乘时间
         List<WaitingTime> waitingTimeList2 = getWaitTime2(waitingTimeList);
 
@@ -33,6 +32,7 @@ public class test {
         {
             session.save(w);
         }
+        dao.updateVersion(5,version,new Timestamp(System.currentTimeMillis()),"第一次提交候车时间");
         session.getTransaction().commit();
 
     }
@@ -41,7 +41,7 @@ public class test {
      * 封装成t_transfer_time 实体类
      * @return
      */
-    private static List<WaitingTime> getWaitTime() {
+    private static List<WaitingTime> getWaitTime(int version) {
         List<WaitingTime> w = new ArrayList<>();
         // 读取Excel表，获取换乘站点
         Set<String> s = new HashSet<>();
@@ -54,6 +54,8 @@ public class test {
             // 反转
             WaitingTime waitingTime1 = new WaitingTime();
             WaitingTime waitingTime2 = new WaitingTime();
+            waitingTime1.setVersion(version);
+            waitingTime2.setVersion(version);
             waitingTime1.setStartLine(Integer.parseInt(startName));
             waitingTime1.setEndLine(Integer.parseInt(endName));
             // waitingTime2
@@ -79,7 +81,6 @@ public class test {
     private static List<WaitingTime> getWaitTime2(List<WaitingTime> w){
         for (int i=0;i<w.size();i++){
             WaitingTime waitingTime = w.get(i);
-            System.out.println(w.get(i).getEndLine());
             switch (waitingTime.getEndLine()){
                 case 1:
                     waitingTime.setWaitingTime(90);

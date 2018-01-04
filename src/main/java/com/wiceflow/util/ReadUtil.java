@@ -1,4 +1,5 @@
 package com.wiceflow.util;
+import com.wiceflow.companyLearn.subway.CVSTODB.TransferStation;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -8,10 +9,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.*;
 import java.util.*;
 
 /**
@@ -22,6 +21,9 @@ public class ReadUtil {
     private Workbook wb;
     private Sheet sheet;
     private Row row;
+
+    public ReadUtil() {
+    }
 
     public ReadUtil(String filepath) {
         if(filepath==null){
@@ -160,7 +162,7 @@ public class ReadUtil {
         return start_end_line;
     }
     /**
-     * 将1.0 变成1号线
+     * 将1.0 变成1
      * @return
      */
     private int changeString(String s){
@@ -196,4 +198,79 @@ public class ReadUtil {
         }
         return sName;
     }
+
+    /**
+     * 设置换乘时间
+     * @param transferPath 换乘表的路径，获取可换乘站点
+     * @param linePath 线路表 获取的候车时间
+     * @return
+     */
+    public List<TransferStation> getTransferStation(String transferPath,String linePath){
+        // TransferStation对象是包括了换乘起始站，换乘终点站，换乘时间
+        List<TransferStation> transferStationList = new ArrayList<>();
+        // 用来存储换乘时间的map 从线路表中读取出来
+        Map<Integer,Integer> map = new HashMap<>();
+        File transferFile = new File(transferPath);
+        File lineFile = new File(linePath);
+        // java1.7自动关闭流
+        try(FileInputStream tFileInputStream = new FileInputStream(transferFile)) {
+            // 若读取中文出现乱码，修改这里的格式
+            Scanner transferScanner = new Scanner(tFileInputStream,"gbk");
+            // 跳过第一行注的解释
+            transferScanner.nextLine();
+            while (transferScanner.hasNext()){
+                String transferLine = transferScanner.nextLine();
+                String[] lines = transferLine.split(",");
+                int startLine = Integer.parseInt(lines[1]);
+                int endLine = Integer.parseInt(lines[2]);
+                TransferStation t1 = new TransferStation(startLine,endLine);
+                // 反转站点候车
+                TransferStation t2 = new TransferStation(endLine,startLine);
+                // transferStation对象中重写了equals方法，只要startLine与endLine相等则判为存在相同对象，
+                //
+                if (transferStationList.contains(t1))
+                    continue;
+                transferStationList.add(t1);
+                transferStationList.add(t2);
+            }
+        }catch (Exception e){
+            System.out.println("读取换乘站点Excel表失败");
+            e.printStackTrace();
+        }
+        // java1.7自动关闭流
+        try(FileInputStream lFileInpuntStream = new FileInputStream(lineFile)) {
+            // 若读取中文出现乱码，修改这里的格式
+            Scanner lineScanner = new Scanner(lFileInpuntStream,"gbk");
+            // 跳过第一行注的解释
+            lineScanner.nextLine();
+            while(lineScanner.hasNext()){
+                String lineString = lineScanner.nextLine();
+                String[] lines = lineString.split(",");
+                int line = Integer.parseInt(lines[0]);
+                int waitingTime = Integer.parseInt(lines[2]);
+                map.put(line,waitingTime);
+            }
+        }catch (Exception e){
+            System.out.println("读取线路表获取候车时间失败");
+            e.printStackTrace();
+        }
+        // 将对应的候车时间加入list中
+        setWaitingTime(transferStationList,map);
+        return transferStationList;
+    }
+
+    /**
+     * 将相应的候车时间加入到存放 transferStation 对应的list中
+     * @param list transferStation数组
+     * @param map 存放线路候车时间的map
+     *
+     *            这里的规则是，加入从1号线换到5号，那么我要在5号线候车，所以候车时间相应的就为
+     *            5号线的候车时间。
+     */
+    public void setWaitingTime(List<TransferStation> list,Map<Integer,Integer> map){
+        for (int i=0;i<list.size();i++){
+           list.get(i).setWaitingTime(map.get(list.get(i).getEndLine()));
+        }
+    }
+
 }
