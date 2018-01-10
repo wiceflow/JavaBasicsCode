@@ -17,19 +17,26 @@ import java.util.Map;
 public class Test {
     public static void main(String[] args) {
 //        GetWaitingTime g = new GetWaitingTime();
-//
-//        int time = g.getWaitingTime(2,11,1);
-//        System.out.println(time);
-        ReadUtil r = new ReadUtil();
-        String path = "F:\\票价\\换乘表.csv";
-        String path2 = "F:\\票价\\线路表.csv";
-        List<TransferStation> list = r.getTransferStation(path,path2);
-        Dao dao = new Dao();
-        try {
-            dao.saveTransferStation(list);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("失败");
-        }
+//        int t = g.getWaitingTime(11,1,1);
+//        System.out.println(t);
+//        ReadUtil r = new ReadUtil();
+//        String path = "F:\\票价\\换乘表.csv";
+//        String path2 = "F:\\票价\\line.csv";
+//        List<TransferStation> list = r.getTransferStation(path,path2);
+//        Dao dao = new Dao();
+//        try {
+//            dao.saveTransferStation(list);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.out.println("失败");
+//        }
+
+        Map<Integer, Integer> map = new HashMap<>(3);
+        System.out.println(map.size());
+        map.put(1, 1);
+        map.put(2, 2);
+        map.put(3, 3);
+        map.put(4, 4);
+        System.out.println(map.size());
     }
 }

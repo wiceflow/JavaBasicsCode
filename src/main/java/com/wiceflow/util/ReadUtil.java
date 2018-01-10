@@ -228,8 +228,9 @@ public class ReadUtil {
                 TransferStation t2 = new TransferStation(endLine,startLine);
                 // transferStation对象中重写了equals方法，只要startLine与endLine相等则判为存在相同对象，
                 //
-                if (transferStationList.contains(t1))
+                if (transferStationList.contains(t1)) {
                     continue;
+                }
                 transferStationList.add(t1);
                 transferStationList.add(t2);
             }

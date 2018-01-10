@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class Dao {
     private Connection connection = null;
-    private int version = 2;
+    private int version = 1;
     public Dao(){
         init();
     }
