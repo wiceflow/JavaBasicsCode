@@ -14,7 +14,9 @@
         <property name="connection.password">123456</property>
         <!-- 指定对应数据库的方言，hibernate为了更好适配各种关系数据库，针对每种数据库都指定了一个方言dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
-
+        <!--二级缓存-->
+        <!--<property name="cache.use_second_level_cache">true</property>-->
+        <!--<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>-->
         <property name="hibernate.event.merge.entity_copy_observer">allow</property>
         <property name="hbm2ddl.auto">create</property>
         <property name="hibernate.current_session_context_class">thread</property>

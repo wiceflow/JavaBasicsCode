@@ -9,11 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by BF on 2017/12/22.
+ *
+ * @author BF
+ * @date 2017/12/22
  * 多对一 一对多 双向
  */
 @Entity
 @Table(name = "t_group")
+@BatchSize(size = 5)
 public class Group {
     private int id;
     private String NAME;
@@ -22,7 +25,7 @@ public class Group {
     // 双向必加映射
     @OneToMany(mappedBy = "group")
     @Cascade(value = CascadeType.ALL)
-//    @JoinColumn(name = "groupId")
+    //  @JoinColumn(name = "groupId")
     public Set<User> getUsers() {
         return users;
     }
