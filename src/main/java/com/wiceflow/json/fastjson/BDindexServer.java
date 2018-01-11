@@ -172,6 +172,7 @@ public class BDindexServer {
             c.add(Restrictions.eq("date", date));
 
             List<BasicCTwo> bv = c.list();
+            //BasicCTwo b = (BasicCTwo) c.uniqueResult();
             if (bv.size()==0||bv==null){
                 _LOG.error("日期输入错误，查询为空");
                 return null;
