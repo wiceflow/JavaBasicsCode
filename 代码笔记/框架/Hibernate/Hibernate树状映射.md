@@ -1,1 +1,1 @@
-# Hibernate树状映射  
+# Hibernate树状映射

@@ -56,3 +56,5 @@
 
   * 具体代码看`Hibernate`相关的的代码笔记
   *
+## HQL
+* 占位符 `:` 后面跟字符  eg:`:aaa`，那么设置值就是`.setPaeameter("aaa","b");`
