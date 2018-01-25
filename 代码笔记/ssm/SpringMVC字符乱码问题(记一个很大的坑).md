@@ -29,7 +29,7 @@
 
 [注意！！] <font color=red>使用了`@responseBody`此注解之后不会再走试图处理器，而是直接将数据写入到输入流中，他的效果等同于通过response对象输出指定格式的数据。</font>
 
-也就是说如果使用了`@responseBody`后返回的数据如果出现了中文字符乱码，这时候无论你是在方法体里面设置`response.setHear()`还是在拦截器中设置拦截也好，他都不回起到任何作用。因为这时候它已经默认不再走任何处理器了。
+也就是说如果使用了`@responseBody`后返回的数据如果出现了中文字符乱码，这时候无论你是在方法体里面设置`response.setContentType()`还是在拦截器中设置拦截也好，他都不回起到任何作用。因为这时候它已经默认不再走任何处理器了。
 - 这时候如果想让它返回中文不乱码需要在`Mapping中加入product属性` 如下：
     ```JAVA
         @RequestMapping(value = "testPersonalValidtor.do",produces = "application/json;charset=utf-8")
@@ -55,7 +55,7 @@
 ```
 注意，`xml`里面的`bean`是写在了`<mvc:annotation-driven>`里面！
 
-<font color=red>这个是新版本的配置，需要去除`xml`中的`RequestMappingHandlerMapping`、`RequestMappingHandlerAdapter`或者`DefaultAnnotationHandlerMapping`、`AnnotationMethodHandlerAdapter`的`Bean`配置
-
+<font color=red>这个是新版本的配置，需要去除`xml`中的`RequestMappingHandlerMapping`、`RequestMappingHandlerAdapter`或者`DefaultAnnotationHandlerMapping`、`AnnotationMethodHandlerAdapter`的`Bean`配置</font>
+这是spring3.1以后的配置
 
 # 若没使用`@ResponseBody`注解直接返回String类型，是会报404的，因为这时候默认进行的是视图渲染。
