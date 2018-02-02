@@ -21,7 +21,9 @@ public class NewGetWaitingTime {
         }
         List<String> interChanges = new ArrayList<>();
         Map<String, Integer> waitTimeMap = new HashMap<>();
+        // 获取线路
         Map<String, Double> lineMap = dao.getLineDate(version);
+        // 获取换乘
         Set<String> interChangeSet = dao.getInterChange(version);
         // 这个list肯定是无序的
         interChanges.addAll(interChangeSet);
@@ -32,7 +34,7 @@ public class NewGetWaitingTime {
 
             String SELine = staLineNo + "-" + subLineNO;
             String ESLine = subLineNO + "-" + staLineNo;
-
+            // Map只保留数据的一半
             if (waitTimeMap.get(SELine) == null && waitTimeMap.get(ESLine) == null) {
                 double waitTimeS = lineMap.get(staLineNo);
                 double waitTimeE = lineMap.get(subLineNO);
