@@ -3,6 +3,7 @@ package com.wiceflow;
 import com.wiceflow.companyLearn.subway.CVSTODB.TransferStation;
 import com.wiceflow.companyLearn.subway.TransforMap.Dao;
 import com.wiceflow.companyLearn.subway.TransforMap.GetWaitingTime;
+import com.wiceflow.companyLearn.subway.TransforMap.NewGetWaitingTime;
 import com.wiceflow.util.ReadUtil;
 
 import java.sql.SQLException;
@@ -31,12 +32,10 @@ public class Test {
 //            System.out.println("失败");
 //        }
 
-        Map<Integer, Integer> map = new HashMap<>(3);
-        System.out.println(map.size());
-        map.put(1, 1);
-        map.put(2, 2);
-        map.put(3, 3);
-        map.put(4, 4);
-        System.out.println(map.size());
+        GetWaitingTime g = new GetWaitingTime();
+        System.out.println(g.getWaitingTime(5, 9, 1));
+
+        NewGetWaitingTime g2 = new NewGetWaitingTime();
+        System.out.println(g2.getWaitingTime(5, 9, 180125175248L));
     }
 }

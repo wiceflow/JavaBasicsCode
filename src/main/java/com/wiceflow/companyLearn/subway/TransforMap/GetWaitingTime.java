@@ -26,6 +26,7 @@ public class GetWaitingTime {
     public Map<String,Integer> getWaitingTimeMap(int version){
         Map<String,Integer> map = new HashMap<>();
         map = dao.getWaitTime(version);
+        System.out.println(map.size());
         return map;
     }
 
