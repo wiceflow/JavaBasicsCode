@@ -4,8 +4,10 @@ import com.wiceflow.companyLearn.subway.CVSTODB.TransferStation;
 import com.wiceflow.companyLearn.subway.TransforMap.Dao;
 import com.wiceflow.companyLearn.subway.TransforMap.GetWaitingTime;
 import com.wiceflow.companyLearn.subway.TransforMap.NewGetWaitingTime;
+import com.wiceflow.excel.util.poi.ImportExcel;
 import com.wiceflow.util.ReadUtil;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +34,33 @@ public class Test {
 //            System.out.println("失败");
 //        }
 
-        GetWaitingTime g = new GetWaitingTime();
-        System.out.println(g.getWaitingTime(5, 9, 1));
+//        GetWaitingTime g = new GetWaitingTime();
+//        System.out.println(g.getWaitingTime(5, 9, 1));
+//
+//        NewGetWaitingTime g2 = new NewGetWaitingTime();
+//        System.out.println(g2.getWaitingTime(5, 9, 180125175248L));
 
-        NewGetWaitingTime g2 = new NewGetWaitingTime();
-        System.out.println(g2.getWaitingTime(5, 9, 180125175248L));
+
+//        File excelFile = new File("F:\\换乘表.xlsx");
+//        String fileName = excelFile.getName();
+//        String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
+//
+//
+//        System.out.println(fileName);
+//        System.out.println(prefix);
+        String path = "F:\\换乘表.xlsx";
+        ImportExcel importExcel = new ImportExcel();
+        try {
+            List<List<Object>> lists = importExcel.parseExcel(path);
+            for (int i = 0; i < lists.size(); i++) {
+                List<Object> list = lists.get(i);
+                for (int j = 0; j < list.size(); j++) {
+                    System.out.print(list.get(j) + "   ");
+                }
+                System.out.print("\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
