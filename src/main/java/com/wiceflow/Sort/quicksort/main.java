@@ -22,7 +22,7 @@ public class main {
 
         a = quicksort.getB();
         for (int i=0;i<count;i++){
-            System.out.println(a[i]);
+            System.out.print(a[i]);
         }
     }
 }

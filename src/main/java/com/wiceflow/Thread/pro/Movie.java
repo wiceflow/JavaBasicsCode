@@ -63,6 +63,7 @@ public class Movie {
             e.printStackTrace();
         }
         System.out.println("消费了" + pic);
+        System.out.println();
         //消费完毕
         //通知生产
         this.notifyAll();
