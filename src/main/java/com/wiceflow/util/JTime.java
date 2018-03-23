@@ -25,7 +25,7 @@ public class JTime {
     /**
      * 过期时间
      */
-    public static final long EXPIRYTIME = 60000;
+    public static final long EXPIRYTIME = 6000;
 
     /**
      * 开始时间  取消魔法值
@@ -61,7 +61,7 @@ public class JTime {
     }
 
     /**
-     * 移除任务  发生在过期任务自动执行完成的时候
+     * 手动移除任务
      *
      * @param key 键值
      */
@@ -75,7 +75,7 @@ public class JTime {
      */
     static {
         // 定时类
-        Timer time = new Timer();
+        final Timer time = new Timer();
         time.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -83,6 +83,7 @@ public class JTime {
                 long starTime = System.currentTimeMillis();
                 // 对象过期时间的Map 迭代这个对象，开始过期任务
                 Iterator<Map.Entry<String, Long>> entryIterator = keyTime.entrySet().iterator();
+                // 这里不需要使用return返回或者break退出，因为当map中所有任务都执行完毕循环就会停止
                 while (entryIterator.hasNext()) {
                     Map.Entry<String, Long> entry = entryIterator.next();
                     String key = entry.getKey();

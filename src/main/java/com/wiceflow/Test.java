@@ -23,7 +23,7 @@ public class Test {
         Jedis jedis = new Jedis("193.112.16.152");
 
         System.out.println("success");
-
+        // 前面那个空格有插件？
         System.out.println(jedis.ping());
     }
 }

@@ -8,6 +8,7 @@ import java.io.File;
  * Created by BF on 2017/10/12.
  */
 public class A implements Sayable {
+    @Override
     public void say() throws InterruptedException {
         System.out.println("我是已经存在的了，无法修改的。");
         // 包含包名
