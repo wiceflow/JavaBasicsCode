@@ -10,9 +10,7 @@ import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by BF on 2017/12/12.
@@ -20,10 +18,23 @@ import java.util.Map;
  */
 public class Test {
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("193.112.16.152");
+        Map dataMap = null;
+        List list = new ArrayList();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        list.add("e");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+            dataMap = (Map) list.get(i);
+        }
 
-        System.out.println("success");
-        // 前面那个空格有插件？
-        System.out.println(jedis.ping());
+        Iterator iterator = dataMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            System.out.println(entry.getKey() + " :" + entry.getValue());
+        }
+
     }
 }
