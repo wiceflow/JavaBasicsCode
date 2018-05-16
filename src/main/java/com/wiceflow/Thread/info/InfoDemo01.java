@@ -14,7 +14,8 @@ public class InfoDemo01 {
         Thread proxy = new Thread(it, "挨踢");
         proxy.setName("test");
         System.out.println(proxy.getName());
-        System.out.println(Thread.currentThread().getName()); //main
+        //main
+        System.out.println(Thread.currentThread().getName());
 
         proxy.start();
         System.out.println("启动后的状态:" + proxy.isAlive());

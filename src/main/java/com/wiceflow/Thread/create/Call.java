@@ -16,9 +16,10 @@ public class Call {
         //获取值
         Future<Integer> result1 =ser.submit(tortoise) ;
         Future<Integer> result2 =ser.submit(rabbit) ;
-
-        Thread.sleep(2000); //2秒
-        tortoise.setFlag(false); //停止线程体循环
+        //2秒
+        Thread.sleep(2000);
+        //停止线程体循环
+        tortoise.setFlag(false);
         rabbit.setFlag(false);
 
         int num1 =result1.get();
