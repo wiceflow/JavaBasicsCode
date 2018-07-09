@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -43,8 +42,10 @@ public class Test {
 //        }
 //    }
     public static void main(String[] args) {
-        String a = "1 day";
-        Timestamp time = Timestamp.valueOf(a);
-        System.out.println(time);
+        double money = 7000;
+        for (int i=0;i<4;i++){
+            money = money + (money * 0.2);
+        }
+        System.out.println(money);
     }
 }

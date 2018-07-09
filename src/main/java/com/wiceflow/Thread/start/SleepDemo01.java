@@ -19,9 +19,9 @@ public class SleepDemo01 {
             // 输出
             System.out.println(new SimpleDateFormat("mm:ss").format(endTime));
             // 构建新的时间
-            endTime = new Date(endTime.getTime()-1000);
+            endTime = new Date(endTime.getTime()-10000);
             // 休眠1秒
-            Thread.sleep(1000);
+            Thread.sleep(100);
             if (end-10000>endTime.getTime()){
                 break;
             }

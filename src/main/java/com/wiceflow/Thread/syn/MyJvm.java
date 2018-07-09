@@ -15,9 +15,9 @@ public class MyJvm {
 
     }
     public static MyJvm getInstance (){
-        if(null==instance){ //提供效率
+        if(null == instance){ //提供效率
             synchronized(MyJvm.class){
-                if(null==instance){ //安全
+                if(null == instance){ //安全
                     instance =new MyJvm();
                 }
             }
