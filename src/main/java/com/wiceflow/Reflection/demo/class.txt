@@ -1,0 +1,2 @@
+className=com.wiceflow.Reflection.demo.Worker
+methodName=work
