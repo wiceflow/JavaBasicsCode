@@ -1,14 +1,11 @@
 package com.wiceflow.introspection;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,9 +47,6 @@ public class IntrospectionIntrospector {
     }
 
     public  <T> void reflection(T userInfo, Class c) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        //Class c = T.class;
-        Class < T >  c  =  (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
         Field[] fields = c.getDeclaredFields();
         Method[] methods = c.getDeclaredMethods();
         Map<String,Object> map = new HashMap<>();
