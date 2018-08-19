@@ -1,8 +1,5 @@
 package com.wiceflow.util;
 
-import jdk.nashorn.internal.runtime.regexp.joni.constants.AnchorType;
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
@@ -12,11 +9,11 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,7 +109,7 @@ public class PoiExcelUtil<T> {
                             byte[] bsValue = (byte[]) value;
                             XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0,
                                     1023, 255, (short) 6, index, (short) 6, index);
-                            anchor.setAnchorType(AnchorType.BEGIN_LINE);
+                            //anchor.setAnchorType(AnchorType.BEGIN_LINE);
                             patriarch.createPicture(anchor, workbook.addPicture(
                                     bsValue, XSSFWorkbook.PICTURE_TYPE_JPEG));
                         } else {
