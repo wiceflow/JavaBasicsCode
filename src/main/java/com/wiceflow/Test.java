@@ -23,29 +23,8 @@ import java.util.*;
  * 常用测试
  */
 public class Test {
-    //    public static void main(String[] args) throws ParseException {
-//        File excel1 = new File("C:\\Users\\duxin\\Desktop\\dujia\\5号线总信息表20180425.csv");
-//        try(FileInputStream fileInputStream = new FileInputStream(excel1)) {
-//            Scanner scanner = new Scanner(fileInputStream,"gbk");
-//            for (int i=1;i<=6;i++){
-//                scanner.nextLine();
-//            }
-//            while (scanner.hasNext()){
-//                String line = scanner.nextLine();
-//                String[] lines = line.split(",");
-//                //System.out.println(lines[0]);
-//                String oo = lines[6];
-//                System.out.println(oo);
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
     public static void main(String[] args) {
-        double money = 7000;
-        for (int i=0;i<4;i++){
-            money = money + (money * 0.2);
-        }
-        System.out.println(money);
+        String s = "         ";
+        System.out.println(s.trim().length());
     }
 }

@@ -16,8 +16,7 @@ public final class TimeUtil {
      */
     public static int returnIntDate(){
         Date date = new Date();
-        int intDate = returnIntDate(date);
-        return intDate;
+        return returnIntDate(date);
     }
 
     /**
