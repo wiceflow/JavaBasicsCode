@@ -31,9 +31,10 @@ public class UrlTest {
         URL url=new URL(urlPath);
         HttpURLConnection httpConn=(HttpURLConnection)url.openConnection();
 
-        //设置参数
-        httpConn.setDoOutput(true);     //需要输出
-        httpConn.setDoInput(true);      //需要输入
+        //设置参数 //需要输出
+        httpConn.setDoOutput(true);
+        //需要输入
+        httpConn.setDoInput(true);
         // 不允许缓存
         httpConn.setUseCaches(false);
         // 设置POST方式连接 默认为false

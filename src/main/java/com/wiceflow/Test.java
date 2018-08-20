@@ -11,6 +11,13 @@ public class Test {
         String s = "         ";
         System.out.println(s.trim().length());
 
-        HttpURLConnectionUtil.TOKEN.getToken();
+        //String s1 = HttpURLConnectionUtil.TOKEN.getToken();
+        //System.out.println(s1);
+
+        String s2 = HttpURLConnectionUtil.TOKEN.getChatgroupsID("test","test1"
+                ,"13824835722",HttpURLConnectionUtil.TOKEN.getToken());
+        System.out.println(s2);
+
+
     }
 }
