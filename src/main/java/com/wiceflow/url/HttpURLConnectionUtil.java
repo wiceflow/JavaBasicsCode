@@ -72,6 +72,9 @@ public enum HttpURLConnectionUtil {
      */
     @SuppressWarnings("unchecked")
     public String getChatgroupsID(String missionName,String desc,String owner,String token){
+        if (token == null || token.isEmpty()){
+            token = getToken();
+        }
         // post 请求的参数
         Map<String,Object> map = new HashMap<>(5);
         // 群组名称
