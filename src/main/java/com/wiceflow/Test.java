@@ -14,7 +14,7 @@ public class Test {
         //String s1 = HttpURLConnectionUtil.TOKEN.getToken();
         //System.out.println(s1);
 
-        String s2 = HttpURLConnectionUtil.TOKEN.getChatgroupsID("test","test1"
+        String s2 = HttpURLConnectionUtil.TOKEN.getChatgroupsID("问","aaa"
                 ,"13824835722",HttpURLConnectionUtil.TOKEN.getToken());
         System.out.println(s2);
 

@@ -121,10 +121,12 @@ public enum HttpURLConnectionUtil {
             httpConn.setDoOutput(true);
             // 需要输入
             httpConn.setDoInput(true);
-            // 不允许缓存
+            // Post 请求不能使用缓存
             httpConn.setUseCaches(false);
             // 设置POST方式连接 默认为GET
             httpConn.setRequestMethod("POST");
+            // 设置本次连接是否自动重定向
+            httpConn.setInstanceFollowRedirects(true);
             // 设置请求属性
             httpConn.setRequestProperty("Content-Type", "application/json");
             // 维持长连接
@@ -141,7 +143,8 @@ public enum HttpURLConnectionUtil {
             dos = new DataOutputStream(httpConn.getOutputStream());
             // 将参数转成字节流传递  （这里使用了fastJSON）
             String jsonParams = JSON.toJSONString(params);
-            dos.writeBytes(jsonParams);
+            // 这里的设置编码后才能传中文参数
+            dos.write(jsonParams.getBytes("utf8"));
             dos.flush();
             // 获得响应状态
             int resultCode = httpConn.getResponseCode();
