@@ -26,7 +26,7 @@
 `InputStream is = new BufferedInputStream(new FileInputStream(src));`
 
 * `BufferedOutputStream`
-直接加上即可  字节读取流
+直接加上即可  字节输出流
 `OutputStream os = new BufferedOutputStream(new FileOutputStream(dest));`
 
 ### 字符缓冲流(有新的方法)

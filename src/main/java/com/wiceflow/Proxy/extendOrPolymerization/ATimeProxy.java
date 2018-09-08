@@ -9,7 +9,7 @@ import java.util.Random;
 public class ATimeProxy implements Sayable{
     // 创建代理对象
     private Sayable s;
-    public ATimeProxy(Sayable s) {
+    ATimeProxy(Sayable s) {
         this.s = s;
     }
     @Override

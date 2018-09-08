@@ -1,4 +1,4 @@
-# @RequestParam
+# @RequestParam  
 用来处理`Content-Type:` 为 `application/x-www-form-urlencoded`编码的内容。（`Http`协议中，如果不指定`Content-Type`，则默认传递的参数就是`application/x-www-form-urlencoded`类型）
 
 >`@RequestParam`可以接受简单类型的属性，也可以接受对象类型。

@@ -12,10 +12,12 @@ public class Client {
         java.lang.reflect.InvocationHandler b = new HAHAHandler(c);
         MoveAble m = (MoveAble)Proxy.newProxyInstance(MoveAble.class,h);
 
+        MoveAble moveAble = (MoveAble)java.lang.reflect.Proxy.newProxyInstance(b.getClass().getClassLoader(), new Class[]{MoveAble.class},b);
+
 
         //MoveAble n = (MoveAble) java.lang.reflect.Proxy.newProxyInstance(Chicken.class.getClassLoader(),Chicken.class.getInterfaces(),b);
-        m.move();
-        m.say();
+        moveAble.move();
+        moveAble.say();
         //n.move();
     }
 }

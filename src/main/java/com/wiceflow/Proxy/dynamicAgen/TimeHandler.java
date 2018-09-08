@@ -12,7 +12,7 @@ public class TimeHandler implements InvocationHandler{
 
 
 
-    public TimeHandler(Object target) {
+    TimeHandler(Object target) {
         super();
         this.target = target;
     }

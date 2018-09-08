@@ -106,4 +106,45 @@ public class StringUtil {
     public static boolean isEmpty(String str) {
         return str == null || str.trim().length() == 0;
     }
+
+    /**
+     * 首字母大写
+     * @param str   [String] 需要判断的字符串
+     * @return      [String] 返回首字母大写的字符串
+     */
+    public static String upperCase(String str) {
+        char[] ch = str.toCharArray();
+        if (ch[0] >= 'a' && ch[0] <= 'z') {
+            ch[0] = (char) (ch[0] - 32);
+        }
+        return new String(ch);
+    }
+
+    /**
+     * 驼峰命名转下划线分割
+     * @param str   [String] 需要转换的字符串
+     * @return      [String] 转后好的字符串
+     */
+    public static String humpTransformation(String str){
+        // 定义下划线
+        String underLine = "_";
+        StringBuilder sb = new StringBuilder();
+        char[] ch = str.toCharArray();
+        for (int i = 0;i < ch.length;i++){
+            char c = ch[i];
+            // 首字母转小写
+            if (c >= 'A' && c <= 'Z'){
+                c = (char)(c + 32);
+                // 首字母不需要先加 _
+                if (i == 0){
+                    sb.append(c);
+                }else {
+                    sb.append(underLine).append(c);
+                }
+            }else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
 }
