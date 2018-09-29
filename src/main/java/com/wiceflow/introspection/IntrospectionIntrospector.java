@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * @author BF
  * @date 2018/7/15
+ * 内省反射   bean to map
  */
 public class IntrospectionIntrospector {
     public static void setPropertyByIntrospector(UserInfo userInfo,String field)throws Exception{
