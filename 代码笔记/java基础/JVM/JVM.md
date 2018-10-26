@@ -11,20 +11,16 @@
 ```java
   所谓常量池的符号引用 例如创建一个新的类：
   public class MyClass {
- public static void main(String[] args) {
-   String str = "abv";
-   int i = 5;
- }
+      public static void main(String[] args) {
+          String str = "abv";
+          int i = 5;
+      }
   }
   这里面的 `MyClass` `str`  `i` 都可以说是常量 存放于常量池中
 ```
 
-```
-
-```
-
 ### 初始化
-  * 初始化阶段是执行类构造器`clinit()`方法的过程，类构造器`clinit()`方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块`static`块中的语句并合并产生的。
+  * 初始化阶段是执行类构造器 `clinit()` 方法的过程，类构造器`clinit()`方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块`static`块中的语句并合并产生的。
 
     > <font color=red>`clinit()`方法平时我们是看不到的,而且也不能自己去定义它</font>
   * 当初始化一个类的时候，如果发现其父类还没有进行初始化、则需要先出发其父类的初始化。

@@ -7,10 +7,6 @@ http://redis.io/download
 
 
 
-
-
-
-
 ## Redis数据类型指令
 ### 键key
 Redis key 值是二进制安全的，这意味着可以用任何二进制序列作为key值，从形如“foo”的简单字符串到一个JPEG文件的内容都可以。空字符串也是有效key值
