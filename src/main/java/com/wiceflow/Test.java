@@ -3,11 +3,14 @@ package com.wiceflow;
 import com.alibaba.fastjson.JSON;
 import com.wiceflow.url.HttpURLConnectionUtil;
 import com.wiceflow.util.DateUtil;
+import com.wiceflow.util.StringUtil;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by BF on 2017/12/12.
@@ -15,59 +18,67 @@ import java.util.*;
  */
 public class Test {
 
-    public static void main(String[] args) throws ParseException {
-//        StringBuilder builder = new StringBuilder();
-//        List<String> list = new ArrayList<>();
-//        testStringBudiler(builder, list);
-//        System.out.println(builder.toString());
-//        System.out.println("----");
-//        System.out.println(list);
+//    private static final int COUNT_BITS = Integer.SIZE - 3;
+//    private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
 //
-//        List<String> list1 = new ArrayList<>();
-//        System.out.println(list1 == null ? 0 : 1);
+//    private static final int RUNNING    = -1 << COUNT_BITS;
+//    private static final int SHUTDOWN   =  0 << COUNT_BITS;
+//    private static final int STOP       =  1 << COUNT_BITS;
+//    private static final int TIDYING    =  2 << COUNT_BITS;
+//    private static final int TERMINATED =  3 << COUNT_BITS;
+//    public static void main(String[] args) throws ParseException {
+//        final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
+//        int b = runStateOf(RUNNING);
+//        int c = workerCountOf(ctl.get());
+//        System.out.println(ctl.get());
+//        // 11100000000000000000000000000000
+//        System.out.println("RUNNING 二进制 ： " + Integer.toBinaryString(RUNNING));
+//        // 11111111111111111111111111111
+//        System.out.println("CAPACITY 二进制 ： " + Integer.toBinaryString(CAPACITY));
+//        System.out.println(SHUTDOWN);
+//    }
+//    private static int runStateOf(int c)     { return c & ~CAPACITY; }
 //
-//        Map<String, Integer> map = new HashMap<>();
-//        System.out.println(map.get("11"));
-//        System.out.println(DateUtil.getHourAndMin());
+//    private static int workerCountOf(int c) {
+//        return c & CAPACITY;
+//    }
+//    private static int ctlOf(int rs, int wc) { return rs | wc; }
+//
+//    private static boolean isRunning(int c) {
+//        return c < SHUTDOWN;
+//    }
 
 
-
-//
+//    public static void main(String[] args) {
 //        People people = new People();
-//        people.setAge("8");
-//        System.out.println(people.getAge());
-//        System.out.println(people.getBus());
-//
-//        people.setName(null);
+//        people.setName("bf");
 //        System.out.println(people.getName());
-//        System.out.println(people.getBus());
-//        String s = people.getName();
-//        System.out.println(s);
+//        System.out.println(people.getAng());
+//    }
 
-//        String string = "2016-10-24 21:59:06";
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        System.out.println(sdf.parse(string));
+    public static void main(String[] args) {
+//        Map<String,People> map = new HashMap<>(2);
+//        People people = new People();
+//        people.setName("a");
+//        people.setAng("2");
+//        map.put("22",people);
+//
+//        People people1 = map.get("22");
+//        people1.setName("hahah");
+//
+//        People people2 = map.get("22");
+//
+//        System.out.println(people.getName());
+        Scanner sreader = new Scanner(System.in);
 
-
-
-//        System.out.println(UUID.randomUUID().toString());
-        Map<String,Boolean> map = new HashMap<>();
-        System.out.println(map.get("a"));
+        String string = sreader.nextLine();
+        System.out.println(string);
     }
 
-
-    public static void testStringBudiler(StringBuilder builder, List<String> list) {
-        list.add("sucess");
-        builder.append("成功");
-        builder.append("aaa");
-    }
 }
-
-class People {
+class People{
     String name;
-    String age;
-
-    List<String> bus;
+    String ang;
 
     public String getName() {
         return name;
@@ -77,19 +88,19 @@ class People {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
+    public String getAng() {
+        return ang;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setAng(String ang) {
+        this.ang = ang;
     }
 
-    public List<String> getBus() {
-        return bus;
-    }
-
-    public void setBus(List<String> bus) {
-        this.bus = bus;
+    @Override
+    public String toString() {
+        return "People{" +
+                "name='" + name + '\'' +
+                ", ang='" + ang + '\'' +
+                '}';
     }
 }
