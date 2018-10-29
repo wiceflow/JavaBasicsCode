@@ -1,5 +1,5 @@
 # ArrayList源码解析
-&nbsp;&nbsp;&nbsp;结合代码中自己实现List来看
+网上的 ArrayList 源码解析非常多，这里我主要讲常用的讲解。
 ## 对于ArrayList需要掌握的七点内容
 * ArrayList的创建：即构造器
 * 往ArrayList中添加对象：即add(E)方法
@@ -10,11 +10,16 @@
 
 ### 一丶ArrayList的创建
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-在ArrayList中存在一个常量`DEFAULT_CAPACITY = 10;`这是ArrayList的默认数组大小，在调用无参构造函数`List`的默认大小为10<font color=red>&nbsp;
-调用无参构造函数时，`List`的初始化在用户调用其`add()`方法后再初始化，从JDK1.8开始变化。</font>
-ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对象的时候就初始化了
+在 ArrayList 中存在一个常量 `DEFAULT_CAPACITY = 10;` 这是 ArrayList 的默认数组大小，在调用无参构造函数 `List` 的默认大小为 10。  
+
+> 用无参构造函数时， `List` 的初始化在用户调用其 `add()` 方法后再初始化，从 JDK 1.8 开始变化。  
+
+ArrayList 的有参构造函数 `new ArrayList(int initialCapacity)` 在构建对象的时候就初始化了  
+
+来看一下 ArrayList 的源码
+
 ```java
-  // 构造一个指定容量的ArrayList
+     // 构造一个指定容量的ArrayList
      public ArrayList(int initialCapacity) {
          if (initialCapacity > 0) {
              this.elementData = new Object[initialCapacity];
@@ -25,10 +30,13 @@ ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对�
                                                 initialCapacity);
          }
      }
-     // 构造一个默认的空ArrayList，这里并没有初始化，jdk 1.8之后是在进行add操作后初始化
+
+     // 构造一个默认的空ArrayList，这里并没有初始化，jdk 1.8之后是在进行add操作后初始化  
+     // DEFAULTCAPACITY_EMPTY_ELEMENTDATA  是一个静态的空数组
      public ArrayList() {
          this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
      }
+
      // 构造一个具有指定元素的ArrayList
      public ArrayList(Collection<? extends E> c) {
          elementData = c.toArray();
@@ -43,12 +51,17 @@ ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对�
      }
 ```
 ### 二丶增加操作
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-增加操作分为在末尾添加元素和插入操作，无论哪个操作都会引起扩容检查`ensureCapacityInternal(size + 1); `
+增加操作分为在末尾添加元素和插入操作，无论哪个操作都会引起扩容检查 `ensureCapacityInternal(size + 1); `  
+
+>  在扩容检查中，我们会发现当 List 数组为默认数组时，就会进行初始化操作  
+
+<img src="/image/big.jpg">
+
 ```java
   // 在数组末尾加上一个元素
   public boolean add(E e) {
-
       ensureCapacityInternal(size + 1);
       elementData[size++] = e;
       return true;
@@ -73,7 +86,7 @@ ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对�
 ```
 ### 三丶GET的方法
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-首先检查GET参数是否越界。越界则爆异常返回
+首先检查GET参数是否越界。越界则出发异常返回
 ```java
     public E get(int index) {
         rangeCheck(index);
@@ -140,21 +153,31 @@ ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对�
       elementData[--size] = null; // clear to let GC do its work
   }
 ```
-### 五丶ArrayList的遍历（iterator()）
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-使用方式
+### 五丶ArrayList的遍历
+
+ArrayList 的遍历方式我所了解的有三种，一种是是 `for循环遍历` ，一种是 `iterator()` 迭代器遍历，一种是 `foreach` 遍历，在数据量少的时候这三种遍历的性能都差不多，但是比较推荐的是使用 `for` 循环遍历，而且最好先用一个变量存储 `list` 的大小。  
+
+例如  
+
 ```java
-  List<String> strList = new ArrayList<String>();
-  strList.add("jigang");
-  strList.add("nana");
-  strList.add("nana2");
-  Iterator<String> it = strList.iterator();
-  while (it.hasNext()) {
-    // it.next() 自动切换到下一个元素
-    System.out.println(it.next());
-  }
+List<String> strs = new ArrayList(5); 
+int size = strs.size();
+for(int i=0 ; i<size; i++){
+    String str = strs.get(i);
+    System.out.println(str);
+}
 ```
+
+这种遍历方式写起来虽然麻烦，但是在性能效果上确是比另外两种要好。  
+
+需要注意一点的是，在 ArrayList 里遍历删除的时候会出现的问题，详情请看我这篇文章：  
+
+
+
+
+
 ### 六丶扩容方法
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 从JDK1.8开始，ArrayList的扩容变为原来的1.5倍
 ```java
@@ -220,7 +243,17 @@ ArrayList的有参构造函数`new ArrayList(int initialCapacity)`在构建对�
               Integer.MAX_VALUE :
               MAX_ARRAY_SIZE;
       }
-  ```
+```
 ## 注意
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-为什么`ArrayList` 不适合频繁插入和删除操作？就是因为在`ArrayList`中我们一直会调用 `System.arraycopy` 这个效率很低的操作来复制数组，所以导致`ArrayList`在插入和删除操作中效率不高。`ArrayList`的底层是用数组来实现的。而`LinkedList`使用链表实现的。
+为什么 `ArrayList` 不适合频繁插入和删除操作？就是因为在 `ArrayList` 中我们一直会调用  `System.arraycopy`  (虽然说这个函数执行效率很高，但还是频繁的浪费资源)的操作来复制数组，所以导致  `ArrayList`  在插入和删除操作中效率不高。  
+
+当然不同的机器测试出来的结果也会不一样，毕竟现在的电脑配置有好有坏的，总不能拿一部老爷机和最新 i7 相比吧。  
+
+fail-fast 机制是 java 集合(Collection)中的一种错误机制。当多个线程对同一个集合的内容进行操作时，就可能会产生 fail-fast 事件。例如：当某一个线程 A 通过 iterator 去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程 A 访问集合时，就会抛出 ConcurrentModificationException 异常，产生 fail-fast 事件。
+
+
+
+说一句面试中面试官都爱问的问题  
+
+>  `ArrayList`的底层是用数组来实现的。而`LinkedList`使用链表实现的。
