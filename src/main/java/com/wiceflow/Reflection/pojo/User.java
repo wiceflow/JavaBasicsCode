@@ -1,12 +1,15 @@
 package com.wiceflow.Reflection.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by BF on 2017/9/1.
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private int age;
     private String uname;
+
 
     public User(int id, int age, String uname) {
         this.id = id;

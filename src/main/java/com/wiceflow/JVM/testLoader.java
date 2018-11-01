@@ -6,6 +6,9 @@ package com.wiceflow.JVM;
  */
 public class testLoader {
     public static void main(String[] args) throws Exception {
+
+        System.out.println(System.getProperty("java.ext.dirs"));
+
         FileSystemClassLoader loader1 = new FileSystemClassLoader("D:/myjava");
         FileSystemClassLoader loader2 = new FileSystemClassLoader("D:/myjava");
 

@@ -6,14 +6,15 @@ package com.wiceflow.JVM;
  */
 public class demo01 {
     public static void main(String[] args) throws ClassNotFoundException {
-        // 当A对象被创建的时候 先会执行静态代码块,再实执行A的构造方法
-        // A a = new A();
-        // System.out.println(a.width);
-        // 输出顺序为  创建初始化类A--> width = 300 --> 创建A对象
-        // A a2 = new A(); // 只会打印 创建A对象，不会再加载第二次
+//        // 当A对象被创建的时候 先会执行静态代码块,再实执行A的构造方法
+//        A a = new A();
+//        System.out.println(a.width);
+//        // 输出顺序为  创建初始化类A--> 创建A对象  --> width = 300
+//        A a2 = new A();
+//        // 只会打印 创建A对象，不会再加载第二次
 
         // 主动引用
-        new A();
+//        new A();
         //System.out.println(A.width);
         //Class.forName("com.wiceflow.JVM.A");
 
