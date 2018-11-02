@@ -250,7 +250,7 @@ for(int i=0 ; i<size; i++){
 
 当然不同的机器测试出来的结果也会不一样，毕竟现在的电脑配置有好有坏的，总不能拿一部老爷机和最新 i7 相比吧。  
 
-fail-fast 机制是 java 集合(Collection)中的一种错误机制。当多个线程对同一个集合的内容进行操作时，就可能会产生 fail-fast 事件。例如：当某一个线程 A 通过 iterator 去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程 A 访问集合时，就会抛出 ConcurrentModificationException 异常，产生 fail-fast 事件。
+fail-fast 机制是 java 集合(Collection)中的一种错误机制。当多个线程对同一个集合的内容进行操作时，就可能会产生 fail-fast 事件。例如：当某一个线程 A 通过 iterator 去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程 A 访问集合时，就会抛出 ConcurrentModificationException 异常，产生 fail-fast 事件。（摘自百度，如有兴趣的同学可以去了解下）
 
 
 
