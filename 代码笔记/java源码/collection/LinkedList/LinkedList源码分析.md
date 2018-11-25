@@ -2,11 +2,12 @@
 &nbsp;&nbsp;&nbsp;JDK1.7后LinkedList的的链表结构是直线链表，之前版本的是环型链表
 &nbsp;&nbsp;&nbsp;LinkedList包含3个全局参数，size存放当前链表有多少个节点。first为指向链表的第一个节点的引用。last为指向链表的最后一个节点的引用。
 ## LinkedList的基本结构
-<img src="LinkedListStructure.png">
+<img src="linklist节点.png">  
+
+在LinkedList 中，我们把链子的 “环” 叫做 “节点”，每个节点都是同样的结构。节点与节点之间相连，构成了我们LinkedList 的基本数据结构，也是 LinkedList 的核心。
 &nbsp;&nbsp;&nbsp;在LinkedList中，我们把链子的“环”叫做“节点”，每个节点都是同样的结构。节点与节点之间相连，构成了我们LinkedList的基本数据结构，也是LinkedList的核心。
-我们再来看一下LinkedList在jdk1.6和1.7直接结构的区别
-首先看1.7中的结构
-<img src="LinkedListStructure2.png">
+1.7中的结构
+<img src="节点图.jpg">
 
 ## LinkedList的构造方法
 &nbsp;&nbsp;&nbsp;
@@ -86,8 +87,7 @@ inkedList构造方法有两个，一个是无参构造，一个是传入Collecti
 这段代码还是很好理解的。我们可以配合图片来深入理解。
 这段代码分为了2种情况，一个是原来的链表是空的，一个是原来的链表有值。我们分别来看
 原来有值的情况
-<img src="linkedList1.png">
-<img src="linkedList2.png">
+<img src="插入.png">
 &nbsp;&nbsp;&nbsp;
 配合代码来看，是不是思路清晰了许多？
 原来链表是空的话就更好办了，直接把传入的Collection对象转化为数组，数组的第一个值就作为头结点，即head，之后的顺序往里加入即可。并且节省了改变原节点指向的的操作。
