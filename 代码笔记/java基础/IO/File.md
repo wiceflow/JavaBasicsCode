@@ -12,23 +12,23 @@
     ````
 ## 相对路径与绝对路径构造 File对象
 ### 相对路径构建File对象的两个方法
-  * `File(String parent, String child) ==>File("E:/xp/test","2.jpg")`
+  * `File(String parent, String child) ==>File("E:/test/test","iceflow.jpg")`
 
   * `File(File parent, String child)
-    ==> File(new File("E:/xp/test"),"2.jpg")`
+    ==> File(new File("E:/test/test"),"iceflow.jpg")`
 
 ### 绝对路径构建File对象的方法
   * `File(String name)`
 
   ```java
-    String parentPath = "E:/xp/test";
-    String name = "2.jpg";
+    String parentPath = "E:/test/test";
+    String name = "iceflow.jpg";
     //相对路径
     File src = new File(parentPath, name);
     src = new File(new File(parentPath), name);
     //输出
-    System.out.println(src.getName());  // 2.jpg
-    System.out.println(src.getPath());  // E:\xp\test\2.jpg
+    System.out.println(src.getName());  // iceflow.jpg
+    System.out.println(src.getPath());  // E:\test\test\iceflow.jpg
     //绝对路径
     src = new File("E:/xp/test/2.jpg");
     //没有盘符: 以 user.dir构建 当前项目路径
