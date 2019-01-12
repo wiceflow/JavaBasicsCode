@@ -1,22 +1,10 @@
 package com.wiceflow;
 
-import com.alibaba.fastjson.JSON;
-import com.wiceflow.url.HttpURLConnectionUtil;
-import com.wiceflow.util.DateUtil;
-import com.wiceflow.util.StringUtil;
-
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Created by BF on 2017/12/12.
  * 常用测试
  */
-public class Test {
+public class Test<T1,T2> {
 
 //    private static final int COUNT_BITS = Integer.SIZE - 3;
 //    private static final int CAPACITY   = (1 << COUNT_BITS) - 1;
@@ -56,23 +44,10 @@ public class Test {
 //        System.out.println(people.getAng());
 //    }
 
-    public static void main(String[] args) {
-//        Map<String,People> map = new HashMap<>(2);
-//        People people = new People();
-//        people.setName("a");
-//        people.setAng("2");
-//        map.put("22",people);
-//
-//        People people1 = map.get("22");
-//        people1.setName("hahah");
-//
-//        People people2 = map.get("22");
-//
-//        System.out.println(people.getName());
-        Scanner sreader = new Scanner(System.in);
 
-        String string = sreader.nextLine();
-        System.out.println(string);
+
+    public static void main(String[] args) {
+
     }
 
 }
