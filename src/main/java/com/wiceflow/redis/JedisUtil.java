@@ -21,11 +21,11 @@ public class JedisUtil {
         people.put("name","iceflow");
         people.put("age","23");
         people.put("phone","13824835722");
-        jedis.hmset("people",people);
+        jedis.hmset("People",people);
         // 这样是可以将Map拿出来的
-        Map<String,String> map = jedis.hgetAll("people");
+        Map<String,String> map = jedis.hgetAll("People");
         // 这个获取的是一个列表 因为Map可能有多个
-        List<String> name  = jedis.hmget("people","name");
+        List<String> name  = jedis.hmget("People","name");
     }
 
     /**

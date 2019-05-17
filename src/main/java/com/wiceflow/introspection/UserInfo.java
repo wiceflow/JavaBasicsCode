@@ -12,6 +12,17 @@ public class UserInfo {
     private int age;
     private String emailAddress;
 
+
+    private Double hight;
+
+    public Double getHight() {
+        return hight;
+    }
+
+    public void setHight(Double hight) {
+        this.hight = hight;
+    }
+
     public long getuserId() {
         return userId;
     }

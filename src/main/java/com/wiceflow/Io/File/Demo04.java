@@ -53,7 +53,7 @@ public class Demo04 {
         File src = new File(path);
         // 不会报异常
         Boolean n = src.mkdir();
-        //Boolean n = src.mkdirs();
+        //Boolean n2 = src.mkdirs();
         System.out.println(n);
     }
 }

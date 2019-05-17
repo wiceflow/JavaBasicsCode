@@ -20,10 +20,18 @@ public class IntrospectionIntrospector {
         PropertyDescriptor[] proDescrtptors = beanInfo.getPropertyDescriptors();
         if(proDescrtptors != null && proDescrtptors.length>0){
             for(PropertyDescriptor propDesc:proDescrtptors){
+                Class clazz = propDesc.getPropertyType();
+                System.out.println(clazz);
+
+                if (clazz.equals(Double.class)){
+                    System.out.println("--------------------");
+                }
+
+
                 if(propDesc.getName().equals(field)){
                     Method methodSetUserName = propDesc.getWriteMethod();
                     methodSetUserName.invoke(userInfo, "alan");
-                    //System.out.println("set userName:"+userInfo.getUserName());
+                    System.out.println("set userName:"+userInfo.getuserName());
                     break;
                 }
             }
@@ -71,10 +79,10 @@ public class IntrospectionIntrospector {
         UserInfo userInfo = new UserInfo();
         String field = "userName";
         UserInfo userInfo2 = new UserInfo(1L,"bf",12,"111@ll.com");
-//        setPropertyByIntrospector(userInfo,field);
+        setPropertyByIntrospector(userInfo,field);
 
 //        getPropertyByIntrospector(userInfo,field);
 
-        i.reflection(userInfo2,UserInfo.class);
+//        i.reflection(userInfo2,UserInfo.class);
     }
 }
