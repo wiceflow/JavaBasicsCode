@@ -7,6 +7,8 @@ package com.wiceflow.polypeptide;
  * <p> 动物接口 </p>
  */
 public interface Animal {
+
+
     /**
      * 吃东西
      */
@@ -16,6 +18,11 @@ public interface Animal {
      * 叫
      */
     void cry();
+
+    /**
+     * 飞
+     */
+    void fly();
 
     /**
      * 跑

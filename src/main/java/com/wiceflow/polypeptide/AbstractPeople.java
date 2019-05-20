@@ -3,31 +3,35 @@ package com.wiceflow.polypeptide;
 /**
  * @author BF
  * @date 2019/5/17 14:51
- * æµ‹è¯•æ¥å£ä¸æŠ½è±¡ç±»çš„å…³ç³»  æ¥å£
+ * ²âÊÔ½Ó¿ÚÓë³éÏóÀàµÄ¹ØÏµ  ½Ó¿Ú
  *
- * <p> äººæŠ½è±¡æ¥å£ </p>
+ * <p> ÈË³éÏó½Ó¿Ú </p>
  */
 public abstract class AbstractPeople implements Animal {
 
     @Override
     public void cry() {
-        System.out.println("æˆ‘æ˜¯äººï¼Œæˆ‘æ‰ä¸ä¹±å«");
+        System.out.println("ÎÒÊÇÈË£¬ÎÒ²Å²»ÂÒ½Ğ");
     }
 
+    @Override
+    public void fly(){
+        System.out.println("ÎÒ²»»á·É");
+    }
     /**
-     * åƒ
+     * ³Ô
      */
     @Override
     public abstract void eat();
 
     /**
-     * èµ°è·¯
+     * ×ßÂ·
      */
     @Override
     public abstract void walk();
 
     /**
-     * è¯´è¯äº¤æµ
+     * Ëµ»°½»Á÷
      */
     @Override
     public abstract void speak();

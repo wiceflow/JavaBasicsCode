@@ -22,4 +22,10 @@ public class People extends AbstractPeople {
     public void speak() {
 
     }
+
+    public static void main(String[] args) {
+        People people = new People();
+        people.cry();
+        System.out.println("test");
+    }
 }
