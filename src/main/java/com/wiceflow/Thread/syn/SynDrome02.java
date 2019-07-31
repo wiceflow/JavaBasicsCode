@@ -11,6 +11,9 @@ public class SynDrome02 {
         thread1.start();
         thread2.start();
 
+
+        Jvm jvm = Jvm.getInstance(1);
+        Jvm jvm1 = Jvm.getInstance1(2);
     }
 }
 class JvmThread extends Thread{
