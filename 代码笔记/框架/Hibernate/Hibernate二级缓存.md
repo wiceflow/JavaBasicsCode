@@ -1,5 +1,5 @@
 # Hibernate二级缓存细解
-`hibernate`的`sessio`n提供了一级缓存，每个`session`，对同一个`id`进行两次`load`，不会发送两条`sql`给数据库，但是`session`关闭的时候，一级缓存就失效了。
+`hibernate`的`session`提供了一级缓存，每个`session`，对同一个`id`进行两次`load`，不会发送两条`sql`给数据库，但是`session`关闭的时候，一级缓存就失效了。
 二级缓存是`SessionFactory`级别的全局缓存，它底下可以使用不同的缓存类库，比如`ehcache`、`oscache`等，需要设置`hibernate.cache.provider_class`，我们这里用`ehcache`，在`2.1`中就是
 `hibernate.cache.provider_class=net.sf.hibernate.cache.EhCacheProvider `如果使用查询缓存，加上 `hibernate.cache.use_query_cache=true`
 

@@ -44,7 +44,7 @@
 
 ### 二、下载nginx包    
 
->**下载命令：wget http://nginx.org/download/nginx-1.12.0.tar.gz**
+>**下载命令：wget http://nginx.org/download/nginx-1.9.10.tar.gz**
 
 注意，链接可能失效，提示链接失效的话可以去官网查  
 
