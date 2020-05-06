@@ -1,4 +1,4 @@
-# 文件操作
+# 文件操作的简单操作
 ## 先来了解文件的两个常量
   * 路径分隔符 `pathSeparator` 实际上就是一个`;`号
   * 名称分隔符 `separator` \(windows)  /(linux 等)
@@ -12,15 +12,19 @@
     ````
 ## 相对路径与绝对路径构造 File对象
 ### 相对路径构建File对象的两个方法
+
+这里的理解为，相对路径是相较于某个文件下的路径，引用别的文件时可获取该文件的路径位置
+
   * `File(String parent, String child) ==>File("E:/test/test","iceflow.jpg")`
 
-  * `File(File parent, String child)
-    ==> File(new File("E:/test/test"),"iceflow.jpg")`
+  * `File(File parent, String child) ==> File(new File("E:/test/test"),"iceflow.jpg")`
 
 ### 绝对路径构建File对象的方法
-  * `File(String name)`
 
   ```java
+    File(String name); // 通过此方法将文件的完整路径传入
+    ----------------------------------------------------------------
+    
     String parentPath = "E:/test/test";
     String name = "iceflow.jpg";
     //相对路径
@@ -28,9 +32,9 @@
     src = new File(new File(parentPath), name);
     //输出
     System.out.println(src.getName());  // iceflow.jpg
-    System.out.println(src.getPath());  // E:\test\test\iceflow.jpg
+    System.out.println(src.getPath());  // E:\test\iceflow.jpg
     //绝对路径
-    src = new File("E:/xp/test/2.jpg");
+    src = new File("E:/test/2.jpg");
     //没有盘符: 以 user.dir构建 当前项目路径
     src = new File("test.txt");
     System.out.println(src.getName()); // test.txt
@@ -80,11 +84,11 @@
   * static listRoots() 根路径
   * Created by BF on 2017/9/21.
   */
-  public class Demo05 {
+  public class Demo {
     public static void main(String[] args) {
-        String path = "E:/xp/test";
+        String path = "E:/file/test/iceflow.jpg";
         File parent = new File(path);
-        //printName(parent);
+        printName(parent);
 
         File[] roots = File.listRoots();
         System.out.println(Arrays.toString(roots));
@@ -111,14 +115,14 @@
 # 文件流（IO）
 ## 主要讲一个文件输入流与文件输出流
 ### 接口
-  * 文件输入流  InputStream
+  * 文件输入流  `InputStream`
 
-  * 文件输出流  OutputStream FileOutputStream
+  * 文件输出流  `OutputStream`   ` FileOutputStream`
 
 ### 实现类
-* FileInputStream
-操作： `byte[] car =new byte[1024];`  +`read`+读取大小
-* FileOutputStream
+* `FileInputStream`
+操作： `byte[] byte = new byte[1024];`  +`read` + 读取大小
+* `FileOutputStream`
   操作  :  `write()` + `flush`
 
 ## 我们来写一个关于文件流操作的工具类(文件的拷贝---简化版)来熟悉它们
