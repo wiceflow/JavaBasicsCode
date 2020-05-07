@@ -12,9 +12,9 @@ import java.io.IOException;
 public class CopyDir {
     public static void main(String[] args) {
         //源目录
-        String srcPath = "E:/xp/test/a/aaa.doc";
+        String srcPath = "E:\\temp\\xt.service\\20191112_154433";
         //目标目录
-        String destPath = "d:/java/test/a";
+        String destPath = "E:\\temp\\bmw";
         try {
             FileUtil.copyDir(srcPath, destPath);
         } catch (FileNotFoundException e) {

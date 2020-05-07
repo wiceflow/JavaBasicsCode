@@ -10,7 +10,7 @@
       /*================================================*/
       打印出： \
     ````
-## 相对路径与绝对路径构造 File对象
+## 相对路径与绝对路径构造 File 对象
 ### 相对路径构建File对象的两个方法
 
 这里的理解为，相对路径是相较于某个文件下的路径，引用别的文件时可获取该文件的路径位置
@@ -73,9 +73,11 @@
 * <font color=blue>利用 `listFiles()`和`static listRoots()`这两个方法可以模仿着做一个文件目录！
 ### 输出子孙级目录|文件名称（绝对路径）
 * `listFiles()` 文件|目录 文件对象形式
+
 * 递归
 
   eg:
+
   ```java
   /**
   * 输出子孙级目录|文件的名称(绝对路径)
@@ -89,7 +91,7 @@
         String path = "E:/file/test/iceflow.jpg";
         File parent = new File(path);
         printName(parent);
-
+  
         File[] roots = File.listRoots();
         System.out.println(Arrays.toString(roots));
         for (File temp : roots) {
@@ -130,7 +132,6 @@
 &emsp;&emsp;文件拷贝的时候先考虑一个：拒绝自己拷贝给自己（即同目录下的拷贝会覆盖，这样做没有意义）
 因为这是一个工具类，我们定义两个重载方法由外界传两个参数进来
 * 其他程序传两个文件路径进来
-`public static void copyDir(String srcPath, String destPath)`
   ```java
     public static void copyDir(String srcPath, String destPath){
       File src = new File(srcPath);
@@ -141,7 +142,7 @@
   ```
 
 * 其他程序传两个File对象进来
-`public static void copyDir(File src, File dest)`
+
   ```java
     public static void copyDir(File src, File dest){
       // 拒绝自己拷贝给自己
@@ -151,7 +152,7 @@
         }
         // 文件夹
         if (src.isDirectory()) {
-            dest = new File(dest, src.getName());
+            dest = new File(dest, src.getName());  // 获取了文件夹路径的最后一个文件夹名
             if (dest.getAbsolutePath().contains(src.getAbsolutePath())) {
                 System.out.println("父目录不能拷贝到子目录中");
                 return;
