@@ -68,7 +68,8 @@ public class FileUtil {
             //确保目标文件夹存在 创建所有不存在的文件夹
             dest.mkdirs();
             //获取下一级目录|文件
-            for (File sub : src.listFiles()) {
+            File[] files = src.listFiles();
+            for (File sub : files) {
                 // 利用递归创建文件夹与文件
                 copyDirDetail(sub, new File(dest, sub.getName()));
             }

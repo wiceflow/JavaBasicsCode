@@ -1,15 +1,16 @@
 # 文件操作的简单操作
 ## 先来了解文件的两个常量
   * 路径分隔符 `pathSeparator` 实际上就是一个`;`号
-  * 名称分隔符 `separator` \(windows)  /(linux 等)
-    ````java
+  * 名称分隔符 `separator` \(windows)  /(linux 等)  
+  
+    ```java
       System.out.System.out.println(File.pathSeparator);
       /*================================================*/
       打印出： ;
       System.out.System.out.println(File.separator);
       /*================================================*/
       打印出： \
-    ````
+    ```
 ## 相对路径与绝对路径构造 File对象
 ### 相对路径构建File对象的两个方法
 
@@ -73,9 +74,9 @@
 * <font color=blue>利用 `listFiles()`和`static listRoots()`这两个方法可以模仿着做一个文件目录！
 ### 输出子孙级目录|文件名称（绝对路径）
 * `listFiles()` 文件|目录 文件对象形式
-* 递归
 
-  eg:
+* 利用递归输出完整文件路径（用作目录）
+
   ```java
   /**
   * 输出子孙级目录|文件的名称(绝对路径)
@@ -89,7 +90,7 @@
         String path = "E:/file/test/iceflow.jpg";
         File parent = new File(path);
         printName(parent);
-
+  
         File[] roots = File.listRoots();
         System.out.println(Arrays.toString(roots));
         for (File temp : roots) {
@@ -127,10 +128,12 @@
 
 ## 我们来写一个关于文件流操作的工具类(文件的拷贝---简化版)来熟悉它们
 ### 1、建立联系   File对象   源头 目的地
+
+文件拷贝的时候先考虑一个：拒绝自己拷贝给自己（即同目录下的拷贝会覆盖，这样做没有意义）
+
 &emsp;&emsp;文件拷贝的时候先考虑一个：拒绝自己拷贝给自己（即同目录下的拷贝会覆盖，这样做没有意义）
 因为这是一个工具类，我们定义两个重载方法由外界传两个参数进来
 * 其他程序传两个文件路径进来
-`public static void copyDir(String srcPath, String destPath)`
   ```java
     public static void copyDir(String srcPath, String destPath){
       File src = new File(srcPath);
@@ -141,7 +144,6 @@
   ```
 
 * 其他程序传两个File对象进来
-`public static void copyDir(File src, File dest)`
   ```java
     public static void copyDir(File src, File dest){
       // 拒绝自己拷贝给自己
@@ -163,7 +165,6 @@
   ```
 ### 2、操作、拷贝
 * 拷贝文件细节--这里用到了递归创建多级文件夹
-`public static void copyDirDetail(File src, File dest)`
   ```java
   public static void copyDirDetail(File src, File dest){
       // 如果文件，则进行拷贝操作
@@ -186,15 +187,15 @@
           for (File sub : src.listFiles()) {
             // 利用递归创建文件夹与文件
             // eg:文件夹a下有一个文件夹b 要把b下面的文件c复制到文件夹d中
-            // 第二次递归参数就是 文件夹 a/b  d/b
-            copyDirDetail(sub, new File(dest, sub.getName()));
+            // 第二次递归参数就是 文件夹 a/b -> d/b 将 b 创建在 d 目录下  
+            // getName 如果为文件夹，则会获取路径最后一层文件夹名称
+            copyDirDetail(sub, new File(dest, sub.getName())); 
           }
       }
   }
   ```
 * 文件的拷贝
-`public static void copyFile(String srcPath, String destPath)`
-`srcPath`  源文件路径 文件拷贝的时候原文件必须存在 `destPath` 目录文件路径
+  `srcPath`  源文件路径 文件拷贝的时候原文件必须存在          `destPath` 目录文件路径
   ```java
   public static void copyFile(String srcPath, String destPath) {
       //1、建立联系 源(存在且为文件) +目的地(文件可以不存在)
@@ -202,7 +203,6 @@
   }
   ```
 * 文件拷贝重载
-`public static void copyFile(File src, File dest)`
   ```java
   public static void copyFile(File src, File dest) {
       // 不是文件或者为null
@@ -233,7 +233,7 @@
           os.write(flush, 0, len);
       }
       os.flush(); //强制刷出
-
+  
       //关闭流
       os.close();
       is.close();
