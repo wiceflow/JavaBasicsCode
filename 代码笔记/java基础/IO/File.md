@@ -10,8 +10,13 @@
       System.out.System.out.println(File.separator);
       /*================================================*/
       打印出： \
+<<<<<<< HEAD
     ```
 ## 相对路径与绝对路径构造 File对象
+=======
+    ````
+## 相对路径与绝对路径构造 File 对象
+>>>>>>> origin/master
 ### 相对路径构建File对象的两个方法
 
 这里的理解为，相对路径是相较于某个文件下的路径，引用别的文件时可获取该文件的路径位置
@@ -74,8 +79,15 @@
 * <font color=blue>利用 `listFiles()`和`static listRoots()`这两个方法可以模仿着做一个文件目录！
 ### 输出子孙级目录|文件名称（绝对路径）
 * `listFiles()` 文件|目录 文件对象形式
+<<<<<<< HEAD
 
 * 利用递归输出完整文件路径（用作目录）
+=======
+
+* 递归
+
+  eg:
+>>>>>>> origin/master
 
   ```java
   /**
@@ -144,6 +156,10 @@
   ```
 
 * 其他程序传两个File对象进来
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
   ```java
     public static void copyDir(File src, File dest){
       // 拒绝自己拷贝给自己
@@ -153,7 +169,7 @@
         }
         // 文件夹
         if (src.isDirectory()) {
-            dest = new File(dest, src.getName());
+            dest = new File(dest, src.getName());  // 获取了文件夹路径的最后一个文件夹名
             if (dest.getAbsolutePath().contains(src.getAbsolutePath())) {
                 System.out.println("父目录不能拷贝到子目录中");
                 return;
