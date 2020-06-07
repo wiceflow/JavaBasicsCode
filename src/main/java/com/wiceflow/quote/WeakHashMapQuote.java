@@ -26,6 +26,13 @@ public class WeakHashMapQuote {
     }
 
     /**
+     * 弱引用
+     */
+    public void weakQuote(){
+
+    }
+
+    /**
      * 强引用的 hashMap 赋值对比
      */
     public void strongQuote() {
