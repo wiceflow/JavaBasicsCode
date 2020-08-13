@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Test01 {
     public static void main(String[] args) {
-        List list = new ArrayList();
+        List<Object> list = new ArrayList();
 
         // 往数据存储数据
         list.add("aaa");
