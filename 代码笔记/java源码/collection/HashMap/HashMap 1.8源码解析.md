@@ -86,5 +86,108 @@
 
 可以看到，在 1.8 中，哈希桶数组的索引位置是由位运算来操作的，下面引用知乎大佬的一个列子[Java 8系列之重新认识HashMap](https://zhuanlan.zhihu.com/p/21673805)  
 
+​                             <img src="image/位移运算获取哈希值.png">   
 
+在 1.8 的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：`(h = k.hashCode()) ^ (h >>> 16)`，主要是从速度、功效、质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。 
+
+
+
+#### put 方法，扩容时发生在 put 中的
+
+```java
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+		// 判断table是否为空，如果是空的就创建一个table，并获取他的长度
+        Node<K,V>[] tab; Node<K,V> p; int n, i;
+        if ((tab = table) == null || (n = tab.length) == 0)
+            n = (tab = resize()).length;
+		// 如果计算出来的索引位置之前没有放过数据，就直接放入
+        if ((p = tab[i = (n - 1) & hash]) == null)
+            tab[i] = newNode(hash, key, value, null);
+        else {
+			// 进入这里说明索引位置已经放入过数据了
+            Node<K,V> e; K k;
+			// 判断put的数据和之前的数据是否重复
+            if (p.hash == hash &&
+                ((k = p.key) == key || (key != null && key.equals(k))))   
+                // key的地址或key的equals()只要有一个相等就认为key重复了，就直接覆盖原来key的value
+                e = p;
+			// 判断是否是红黑树，如果是红黑树就直接插入树中
+            else if (p instanceof TreeNode)
+                e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+            else {
+				// 如果不是红黑树，就遍历每个节点，判断链表长度是否大于8，如果大于就转换为红黑树
+                for (int binCount = 0; ; ++binCount) {
+                    if ((e = p.next) == null) {
+                        p.next = newNode(hash, key, value, null);
+                        if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+					// 判断索引每个元素的key是否可要插入的key相同，如果相同就直接覆盖
+                    if (e.hash == hash &&
+                        ((k = e.key) == key || (key != null && key.equals(k))))
+                        break;
+                    p = e;
+                }
+            }
+			// 如果e不是null，说明没有迭代到最后就跳出了循环，说明链表中有相同的key，因此只需要将value覆盖，并将oldValue返回即可
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+		// 说明没有key相同，因此要插入一个key-value，并记录内部结构变化次数
+        ++modCount;
+        // 插入数据后，若数组容量大于扩容触发条件
+        if (++size > threshold)
+            resize();
+        afterNodeInsertion(evict);
+        return null;
+    }
+```
+
+思路如下：
+
+* 判断table[]是否为空
+
+* 判断table[i]处是否插入过值
+
+* 判断链表长度是否大于8，如果大于就转换为红黑二叉树，并插入树中
+
+* 判断key是否和原有key相同，如果相同就覆盖原有key的value，并返回原有value
+
+* 如果key不相同，就插入一个key，记录结构变化一次
+* 判断是否需要扩容  
+
+来一张流程图看看  
+
+ <img src="image/1.8put过程.png">  
+
+
+
+我们的`HashMap` 扩容就发生在 `put`  过程中，可以看到，当产生哈希冲突的时候，`value` 会形成一条链表，而在 1.8 中，当链表的长度大于8的时候，链表就会转换为红黑树，此时这一个哈希桶的查询效率就变成了 O(logn)    
+
+**上面讲到了扩容时 1.8 引入了红黑树，这是其中一个改进，还在一个改进是啥？**  
+
+还有一个改进我们上面也已经说了，就是 `Hash` 值得计算。  
+
+继续用图来解释一下  [HashMap JDK1.8实现原理](https://www.cnblogs.com/duodushuduokanbao/p/9492952.html)
+
+<img src="image/1.8hash过程.png">  
+
+我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。看上图可以明白这句话的意思，n 为 table 的长度，图（a）表示扩容前的 `key1` 和 `key2` 两种 `key` 确定索引位置的示例，图（b）表示扩容后 `key1` 和 `key2` 两种 `key` 确定索引位置的示例，其中 `hash1` 是 `key1` 对应的哈希与高位运算结果。  
+
+元素在重新计算 hash 之后，因为 n 变为 2 倍，那么 n-1 的 mask 范围在高位多 1 bit (红色)，因此新的 index 就会发生这样的变化：  
+
+<img src="image/1.8位运算结果.png">
+
+因此，我们在扩充 `HashMap` 的时候，不需要像 1.7 的实现那样重新计算 `hash`，只需要看看原来的 `hash` 值新增的那个 `bit` 是1还是0就好了，是0的话索引没变，是1的话索引变成 `“原索引+oldCap”`，可以看看下图为16扩充为32的 `resize` 示意图：
+
+<img src="image/1.8扩容示意图.png">
+
+这个设计确实非常的巧妙，既省去了重新计算 `hash` 值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此 `resize` 的过程，均匀的把之前的冲突的节点分散到新的 `bucket` 了。这一块就是 1.8 新增的优化点。有一点注意区别，1.7 中 `rehash` 的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出 1.8不会倒置。
 
