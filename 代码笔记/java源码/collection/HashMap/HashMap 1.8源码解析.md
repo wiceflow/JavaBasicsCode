@@ -189,5 +189,55 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 <img src="image/1.8扩容示意图.png">
 
-这个设计确实非常的巧妙，既省去了重新计算 `hash` 值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此 `resize` 的过程，均匀的把之前的冲突的节点分散到新的 `bucket` 了。这一块就是 1.8 新增的优化点。有一点注意区别，1.7 中 `rehash` 的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出 1.8不会倒置。
+这个设计确实非常的巧妙，既省去了重新计算 `hash` 值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此 `resize` 的过程，均匀的把之前的冲突的节点分散到新的 `bucket` 了。这一块就是 1.8 新增的优化点。有一点注意区别，1.7 中 `rehash` 的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出 1.8不会倒置。  
+
+### get 方法，简单提及一下  
+
+get 方法没有啥特别的，就是在 `get` 数据的时候，先判断哈希桶的位置上是链表还是红黑树，再根据不同的形式去获取对应的值。  
+
+有一点稍微注意的是，哈希数组中的第一位存的是 `key = null` 的值，当 `key`  为空的时候，默认直接返回对应的值  
+
+```java
+	final Node<K,V> getNode(int hash, Object key) {
+        Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+		// 如果表不是空的，并且要查找索引处有值，就判断位于第一个的key是否是要查找的key
+        if ((tab = table) != null && (n = tab.length) > 0 &&
+            (first = tab[(n - 1) & hash]) != null) {
+            if (first.hash == hash && // always check first node
+                ((k = first.key) == key || (key != null && key.equals(k))))
+				// 如果是，就直接返回
+                return first;
+			// 如果不是就判断链表是否是红黑二叉树，如果是，就从树中取值
+            if ((e = first.next) != null) {
+                if (first instanceof TreeNode)
+                    return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+				// 如果不是树，就遍历链表
+                do {
+                    if (e.hash == hash &&
+                        ((k = e.key) == key || (key != null && key.equals(k))))
+                        return e;
+                } while ((e = e.next) != null);
+            }
+        }
+        return null;
+    }
+```
+
+### 红黑树  
+
+都说红黑树效率高，那是为什么呢？
+
+> [答案在这里](www.baidu.com)  我了解的不是很清楚，只知道它是一个自平衡的二叉查找树  
+
+**那在 `HashMap`  中不一开始就是用红黑树，而是要在链表长度大于 8 的时候才将链表转换为红黑树？**  
+
+在这里可以从两方面来解释
+
+（1）构造红黑树要比构造链表复杂，在链表的节点不多的时候，从整体的性能看来， 数组+链表+红黑树的结构可能不一定比数组+链表的结构性能高。就好比杀鸡焉用牛刀的意思。
+
+（2）`HashMap` 频繁的扩容，会造成底部红黑树不断的进行拆分和重组，这是非常耗时的。因此，也就是链表长度比较长的时候转变成红黑树才会显著提高效率。  
+
+
+
+完结~
 
