@@ -12,8 +12,8 @@ public class bubbleSort02 {
     public static void main(String[] args) {
         int[] arr = {9, 8, 7, 5, 6};
         int[] brr = {9,1,2,3,4};
-        sortSec(arr);
-        sortThree(brr);
+//        sortSec(arr);
+        sortThree(arr);
     }
 
     /**
@@ -40,7 +40,7 @@ public class bubbleSort02 {
                 }
                 System.out.println(Arrays.toString(arr));
             }
-            if (!isBreak){
+            if (isBreak){
                 break;
             }
         }
