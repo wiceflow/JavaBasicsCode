@@ -46,8 +46,6 @@ class Test implements Runnable {
         }
         System.out.println("一手给钱");
     }
-
-
 }
 
 class Test2 implements Runnable {

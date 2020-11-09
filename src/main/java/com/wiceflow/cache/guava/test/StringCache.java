@@ -22,7 +22,7 @@ public class StringCache extends AbstractGuavaCacheService<String,String> {
         System.out.println("触发加载缓存");
         // 这句话并不需要
 //        this.put(key,"cache put");
-        return "cache put";
+        return null;
     }
 
     @Override
