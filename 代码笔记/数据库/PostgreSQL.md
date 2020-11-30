@@ -25,11 +25,11 @@
       CONSTRAINT student2_pkey PRIMARY KEY (id)
     )
     这时候会提示 `CREATE TABLE`
-
+    
     ALTER TABLE public.student2
     OWNER TO postgres;
     改变所有折
-
+    
     COMMENT ON TABLE public.student2
     IS '这是一个学生信息表2';
     给表添加注释
