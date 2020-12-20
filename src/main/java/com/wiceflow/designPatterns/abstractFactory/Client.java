@@ -8,14 +8,16 @@ package com.wiceflow.designPatterns.abstractFactory;
 public class Client {
     public static void main(String[] args) {
         // 获得形状工厂
-        AbstractFactory shapeFactory = FactoryProducer.getFactory("sHApe");
+        AbstractFactory shapeFactory = FactoryProducer.getFactory("shap");
         // 获取圆形对象
-        Shape Circle = shapeFactory.getSquare("circle");
-        Circle.draw();
+        assert shapeFactory != null;
+        Shape circle = shapeFactory.getSquare("circle");
+        circle.draw();
 
         // 获取颜色工厂
         AbstractFactory colorFactory = FactoryProducer.getFactory("color");
         // 获取蓝色
+        assert colorFactory != null;
         Color blue = colorFactory.getColor("blue");
         blue.fill();
     }

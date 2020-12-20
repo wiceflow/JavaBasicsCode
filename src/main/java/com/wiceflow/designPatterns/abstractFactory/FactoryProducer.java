@@ -6,9 +6,9 @@ package com.wiceflow.designPatterns.abstractFactory;
  */
 public class FactoryProducer {
     public static AbstractFactory getFactory(String choice){
-        if (choice.equalsIgnoreCase("shape")){
+        if ("shape".equalsIgnoreCase(choice)){
             return new ShapeFactory();
-        }else if (choice.equalsIgnoreCase("color")){
+        }else if ("color".equalsIgnoreCase(choice)){
             return new ColorFactory();
         }
         return null;

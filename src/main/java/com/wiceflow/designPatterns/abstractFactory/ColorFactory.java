@@ -11,11 +11,11 @@ import com.wiceflow.designPatterns.abstractFactory.impl.Red;
 public class ColorFactory extends AbstractFactory {
     @Override
     Color getColor(String color) {
-        if (color.equalsIgnoreCase("Red")){
+        if ("red".equalsIgnoreCase(color)){
             return new Red();
-        }else if (color.equalsIgnoreCase("green")){
+        }else if ("green".equalsIgnoreCase(color)){
             return new Green();
-        }else if (color.equalsIgnoreCase("blue")){
+        }else if ("blue".equalsIgnoreCase(color)){
             return new Blue();
         }
         return null;

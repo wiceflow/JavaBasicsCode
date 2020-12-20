@@ -21,11 +21,11 @@ public class ShapeFactory extends AbstractFactory {
 
     @Override
     Shape getSquare(String square) {
-        if (square.equalsIgnoreCase("Circle")){
+        if ("Circle".equalsIgnoreCase(square)){
             return new Circle();
-        }else if (square.equalsIgnoreCase("Rectangle")){
+        }else if ("Rectangle".equalsIgnoreCase(square)){
             return new Rectangle();
-        }else if (square.equalsIgnoreCase("Square")){
+        }else if ("Square".equalsIgnoreCase(square)){
             return new Square();
         }
         return null;
