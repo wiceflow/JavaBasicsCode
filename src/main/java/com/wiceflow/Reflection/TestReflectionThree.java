@@ -23,15 +23,15 @@ public class TestReflectionThree {
             User u1 = clazz.newInstance();                               // 其实是调用了User的无参构造方法
             System.out.println(u1.getUname());                           // null
 
-            Constructor<User> c = clazz.getDeclaredConstructor(int .class,int.class,String.class);
-            User u2 = c.newInstance(1001,01,"高琪");
-            System.out.println(u2.getUname());                           // 高琪
+//            Constructor<User> c = clazz.getDeclaredConstructor(int .class,int.class,String.class);
+//            User u2 = c.newInstance(1001,01,"高琪");
+//            System.out.println(u2.getUname());                           // 高琪
 
             // 通过反射API调用方法
             User u3 = clazz.newInstance();
             // 利用这个方法可以动态的从配置文件,数据库中读取信息动态调用不同方法
             Method method = clazz.getDeclaredMethod("setUname", String.class);
-            method.invoke(u3,"BF");
+            method.invoke(u3,null);
             System.out.println(u3.getUname());                           // BF
 
             // 通过反射API操作属性
