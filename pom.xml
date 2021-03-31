@@ -145,7 +145,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>26.0-jre</version>
+            <version>29.0-jre</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <!--&lt;!&ndash; 解析Excel表 版本有点低 &ndash;&gt;-->
@@ -174,7 +174,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>25.0-jre</version>
+            <version>29.0-jre</version>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
